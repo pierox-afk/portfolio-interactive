@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portafolio - Estilo Minecraft</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Preload fuente Minecraft (si existe en assets/fonts) -->
+  <link rel="preload" href="assets/fonts/Minecraft.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+
+<body>
+  <canvas id="bg"></canvas>
+  <!-- Menú estilo Minecraft -->
+  <video class="mc-menu-bg-video" autoplay loop muted playsinline>
+    <source src="assets/textures/MInecraft Calm Lake - vorobbkk (1080p, vp9).webm" type="video/webm" />
+    <!-- Si el video no carga, se muestra el fondo pixelado -->
+  </video>
+  <div class="mc-menu-bg"></div>
+  <!-- UI click sound (from textures folder) -->
+  <audio id="nether-ambient-sound" loop preload="auto">
+    <!-- Asumo que tienes un sonido ambiental en esta ruta -->
+    <source src="assets/sounds/nether_ambient.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="fire-sound" loop preload="auto">
+    <source src="assets/textures/fire.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="ui-sound" preload="auto"></audio>
+  <div class="mc-menu-container">
+    <div class="mc-menu-header">
+      <!-- Main title image (PNG uploaded by user) -->
+      <img src="assets/textures/PORTAFOLIO-4-11-2025.png" alt="PORTAFOLIO" class="menu-title-image">
+      <!-- Subtitle image (PNG uploaded by user) -->
+      <img src="assets/textures/Piero-Sansossio-Edition-4-11-2025.png" alt="Piero Sansossio edition"
+        class="menu-subtitle-image">
+    </div>
+    <div class="mc-menu-buttons">
+      <!-- Two large stacked buttons -->
+      <button class="mc-menu-btn large" id="btn-about">About Me</button>
+      <button class="mc-menu-btn large" id="btn-projects">Projects</button>
+
+      <!-- Bottom row: two smaller buttons side-by-side -->
+      <div class="bottom-menu">
+        <button class="mc-menu-btn small-button" id="btn-contact">Contact</button>
+        <button class="mc-menu-btn small-button" id="btn-resume">My Resume</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portal Overlay for dimension change -->
+  <div id="portal-overlay" class="portal-overlay">
+    <div class="portal-frame"></div>
+  </div>
+
+  <!-- Nether Projects View -->
+  <div id="nether-projects-container" class="nether-projects-container">
+    <div class="nether-content">
+      <button id="nether-close-btn" class="nether-close-btn">&times;</button>
+      <h2>Nether Projects</h2>
+      <div id="projects-grid" class="projects-grid">
+        <!-- Los proyectos se cargarán aquí -->
+      </div>
+      <button id="btn-back-to-overworld" class="mc-menu-btn nether-btn">Back to Overworld</button>
+    </div>
+  </div>
+
+
+
+
+
+  <div id="info-modal" class="hidden">
+    <div class="modal-content">
+      <button id="close-modal">&times;</button>
+      <h2 id="modal-title">Title</h2>
+      <p id="modal-description">Description...</p>
+      <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer">View Project</a>
+    </div>
+  </div>
+
+
+
+  <!-- Book View for "About Me" -->
+  <div id="book-container" class="book-container">
+    <div class="book-content">
+      <div class="book">
+        <div class="book-cover">
+          <div class="book-cover-content">
+            <h2>Piero's Journal</h2>
+            <span>(About Me)</span>
+          </div>
+        </div>
+        <div id="resume-content" class="book-page"></div>
+      </div>
+      <button id="book-close-btn" class="book-close-btn">Close Book</button>
+    </div>
+  </div>
+
+  <!-- Map View for "Contact" -->
+  <div id="map-container" class="map-container">
+    <div class="map-content">
+      <button id="map-close-btn" class="map-close-btn">&times;</button>
+      <!-- Decoraciones del mapa para darle vida -->
+      <img src="assets/textures/assets/minecraft/textures/block/compass_00.png" class="map-decoration compass"
+        alt="Compass">
+      <img src="assets/textures/assets/minecraft/textures/block/oak_log.png" class="map-decoration"
+        style="width: 32px; top: 75%; left: 15%;" alt="Tree">
+      <img src="assets/textures/assets/minecraft/textures/block/oak_log.png" class="map-decoration"
+        style="width: 32px; top: 80%; left: 18%;" alt="Tree">
+      <img src="assets/textures/assets/minecraft/textures/block/stone.png" class="map-decoration"
+        style="width: 48px; top: 10%; left: 60%;" alt="Mountain">
+      <img src="assets/textures/assets/minecraft/textures/block/stone.png" class="map-decoration"
+        style="width: 40px; top: 15%; left: 65%;" alt="Mountain">
+
+      <a href="https://www.linkedin.com/in/pierosansossio-590877291" target="_blank" rel="noopener" class="map-marker"
+        style="top: 30%; left: 25%;">
+        <img src="assets/textures/assets/minecraft/textures/block/bookshelf.png" alt="LinkedIn">
+        <span>LinkedIn</span>
+      </a>
+      <a href="https://github.com/PieroSansossio" target="_blank" rel="noopener" class="map-marker"
+        style="top: 65%; left: 70%;">
+        <img src="assets/textures/assets/minecraft/textures/block/crafting_table_top.png" alt="GitHub">
+        <span>GitHub</span>
+      </a>
+      <a href="mailto:piero.sansossio@gmail.com" class="map-marker" style="top: 50%; left: 50%;">
+        <img src="assets/textures/assets/minecraft/textures/block/enchanting_table_top.png" alt="Email">
+        <span>Email</span>
+      </a>
+    </div>
+  </div>
+
+  <script type="module">
+    import * as THREE from './lib/three.js-master/build/three.module.js';
+    // expose globally for legacy scripts that expect `THREE` on window
+    window.THREE = THREE;
+  </script>
+  <script>
+    // Asegurar que la ruta del vídeo con espacios/paréntesis se codifique correctamente
+    (function () {
+      const vid = document.querySelector('.mc-menu-bg-video');
+      if (!vid) return;
+      const srcEl = vid.querySelector('source');
+      if (!srcEl) return;
+      const rawPath = srcEl.getAttribute('src');
+      // encodeURI preserva / y : y codifica espacios y paréntesis
+      const encoded = encodeURI(rawPath);
+      if (encoded !== rawPath) srcEl.setAttribute('src', encoded);
+
+      // reload source and try to play; if fails, hide video and show fallback
+      vid.load();
+      vid.addEventListener('loadeddata', () => {
+        console.log('mc menu video loaded OK');
+        vid.style.display = 'block';
+        const fallback = document.querySelector('.mc-menu-bg');
+        if (fallback) fallback.style.display = 'none';
+      });
+      vid.addEventListener('error', (ev) => {
+        console.error('mc menu video error', ev);
+        vid.style.display = 'none';
+        const fallback = document.querySelector('.mc-menu-bg');
+        if (fallback) fallback.style.display = 'block';
+      });
+      vid.play().catch((err) => {
+        console.warn('video.play() rejected:', err);
+        // autoplay policy may block play; keep muted and show fallback if needed
+        vid.style.display = 'none';
+        const fallback = document.querySelector('.mc-menu-bg');
+        if (fallback) fallback.style.display = 'block';
+      });
+    })();
+  </script>
+  <script src="main.js"></script>
+  <script>
+    // Pequeñas interacciones: abrir / cerrar about y smooth scroll
+    document.addEventListener('DOMContentLoaded', async function () {
+      // Toolbelt
+      const toolbelt = document.getElementById('toolbelt');
+      if (toolbelt) {
+        let selectedTool = 'hand';
+        toolbelt.addEventListener('click', (e) => {
+          const btn = e.target.closest('.tool-btn');
+          if (!btn) return;
+          document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedTool = btn.dataset.tool;
+          // store on window for main.js access
+          window.portfolioSelectedTool = selectedTool;
+        });
+      }
+
+      // Chest modal close
+      const chestModal = document.getElementById('chest-modal');
+      const closeChest = document.getElementById('close-chest');
+      if (closeChest) closeChest.addEventListener('click', (e) => { e.preventDefault(); chestModal.classList.add('hidden'); });
+
+      // --- Lógica de ui.js movida aquí ---
+      try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        populateProjects(data.projects); // Cargar datos de proyectos
+        populateResume(data.resume);
+      } catch (error) {
+        console.error('Error fetching or populating data:', error);
+      }
+
+      // --- Lógica para la transición del menú y pantallas ---
+      const menuContainer = document.querySelector('.mc-menu-container');
+      const menuVideo = document.querySelector('.mc-menu-bg-video');
+      const menuBg = document.querySelector('.mc-menu-bg');
+      const gameUI = document.querySelectorAll('.instructions');
+      const fireSound = document.getElementById('fire-sound');
+      const netherSound = document.getElementById('nether-ambient-sound');
+      const netherProjectsContainer = document.getElementById('nether-projects-container');
+      const bookContainer = document.getElementById('book-container');
+      const mapContainer = document.getElementById('map-container');
+
+      // --- Desbloqueo de Audio ---
+      // Los navegadores modernos bloquean el audio hasta la primera interacción.
+      // Esta función "desbloquea" los sonidos en el primer clic.
+      function unlockAudio() {
+        netherSound.play().then(() => netherSound.pause()).catch(() => { });
+        fireSound.play().then(() => fireSound.pause()).catch(() => { });
+        // Una vez desbloqueado, ya no necesitamos este evento.
+        window.removeEventListener('click', unlockAudio);
+      }
+      window.addEventListener('click', unlockAudio);
+      // --- Fin de Desbloqueo de Audio ---
+
+
+      function enterScene() {
+        menuContainer.classList.add('hidden');
+
+        // Inicia la animación del portal
+        const portalOverlay = document.getElementById('portal-overlay');
+        portalOverlay.classList.add('active');
+
+        // Espera a que la animación del portal esté en su punto álgido
+        setTimeout(() => {
+          menuVideo.classList.add('hidden');
+
+          menuBg.style.opacity = '0'; // Forzamos la ocultación del fondo del menú
+          document.body.classList.add('nether-bg'); // Cambia el fondo al del Nether
+          portalOverlay.classList.remove('active'); // Desvanece el portal
+          netherProjectsContainer.classList.add('visible');
+        }, 1500); // 1.5 segundos para la transición
+      }
+
+      function returnToMenu() {
+        const isFromNether = netherProjectsContainer.classList.contains('visible');
+
+        if (isFromNether) {
+          // Detiene el sonido del Nether
+          netherSound.pause();
+          netherSound.currentTime = 0;
+          fireSound.pause();
+          fireSound.currentTime = 0; // Corregimos para que apunte a fireSound
+          // Oculta la pantalla de proyectos del Nether
+          netherProjectsContainer.classList.remove('visible');
+
+          // Activa la animación del portal para el regreso
+          const portalOverlay = document.getElementById('portal-overlay');
+          portalOverlay.classList.add('active');
+
+          // Espera a que la animación del portal haga efecto
+          setTimeout(() => {
+            document.body.classList.remove('nether-bg'); // Restaura el fondo original
+            menuContainer.classList.remove('hidden');
+            menuVideo.classList.remove('hidden');
+            menuBg.style.opacity = '1';
+            portalOverlay.classList.remove('active'); // Desvanece el portal
+          }, 1500);
+        } else {
+          // Lógica para cerrar el libro o el mapa (sin portal)
+          const book = bookContainer.querySelector('.book');
+          if (book && book.classList.contains('open')) book.classList.remove('open');
+          bookContainer.classList.remove('visible');
+          mapContainer.classList.remove('visible');
+          menuContainer.classList.remove('hidden');
+          menuVideo.classList.remove('hidden');
+          menuBg.style.opacity = '1';
+        }
+      }
+
+      // --- Asignar eventos a los botones ---
+
+      // Menú principal
+      document.getElementById('btn-about').addEventListener('click', (e) => {
+        e.preventDefault();
+        menuContainer.classList.add('hidden');
+        bookContainer.classList.add('visible');
+      });
+
+      document.getElementById('btn-projects').addEventListener('click', (e) => {
+        e.preventDefault();
+        // Preparamos y reproducimos los sonidos de una manera más robusta
+        try {
+          netherSound.volume = 0.5;
+          netherSound.play();
+          fireSound.volume = 0.4;
+          fireSound.play();
+        } catch (err) {
+          console.error("Error al reproducir sonidos ambientales:", err);
+        }
+        enterScene();
+      });
+
+      document.getElementById('btn-contact').addEventListener('click', (e) => {
+        e.preventDefault();
+        menuContainer.classList.add('hidden');
+        mapContainer.classList.add('visible');
+      });
+
+      document.getElementById('btn-resume').addEventListener('click', (e) => {
+        e.preventDefault();
+        menuContainer.classList.add('hidden');
+        bookContainer.classList.add('visible');
+      });
+
+      // Abrir el libro al hacer clic en la cubierta
+      document.querySelector('.book-cover').addEventListener('click', () => {
+        const book = document.querySelector('.book');
+        book.classList.add('open');
+      });
+
+      // Botones de cierre de las pantallas
+      document.getElementById('book-close-btn').addEventListener('click', () => {
+        const book = bookContainer.querySelector('.book');
+
+        // 1. Si el libro está abierto, inicia la animación de cierre
+        if (book && book.classList.contains('open')) {
+          book.classList.remove('open');
+
+          // 2. Espera a que la animación de cierre (1.2s) termine antes de volver al menú
+          setTimeout(() => {
+            bookContainer.classList.remove('visible'); // Oculta el contenedor del libro
+            returnToMenu(); // Muestra el menú principal
+          }, 1200);
+        } else {
+          // Si el libro ya está cerrado, vuelve al menú inmediatamente
+          returnToMenu();
+        }
+      });
+
+      document.getElementById('map-close-btn').addEventListener('click', () => {
+        returnToMenu();
+      });
+
+      document.getElementById('nether-close-btn').addEventListener('click', () => {
+        returnToMenu();
+      });
+
+      document.getElementById('btn-back-to-overworld').addEventListener('click', () => {
+        returnToMenu();
+      });
+
+      function populateResume(resumeData) {
+        const resume = document.getElementById('resume-content'); // Apuntamos al contenedor del libro
+        if (!resume) return;
+        resume.innerHTML = `
+          <div class="book-page-left">
+            <header class="resume-header">
+              <h1>${resumeData.name}</h1>
+              <div class="resume-meta">
+              </div>
+            </header>
+            <div class="resume-body">
+              <h3>Profile</h3>
+              <p>${resumeData.profile}</p>
+            </div>
+          </div>
+          <div class="book-page-right">
+            <h3>My Growth Strategy</h3>
+            <p>${resumeData.education.description}</p>
+            <br>
+            
+            <p>${resumeData.profileSummary}</p>
+          </div>`;
+      }
+
+      function populateProjects(projectsData) {
+        const projectsGrid = document.getElementById('projects-grid');
+        if (!projectsGrid) return;
+        projectsGrid.innerHTML = projectsData.map(project => `
+          <div class="project-card-nether">
+            <img src="${project.icon}" alt="${project.title}">
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <a href="${project.link}" target="_blank" rel="noopener">View Project</a>
+          </div>
+        `).join('');
+      }
+
+      // Setup UI click sound using Web Audio API (buffers sound to avoid delay)
+      (function () {
+        const audioPath = 'assets/textures/Voicy_Minecraft Click.mp3';
+        let audioBuffer = null;
+        let audioCtx = null;
+
+        // Try to initialize AudioContext and decode the file
+        async function initAudio() {
+          try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const resp = await fetch(encodeURI(audioPath));
+            const arrayBuffer = await resp.arrayBuffer();
+            audioBuffer = await audioCtx.decodeAudioData(arrayBuffer.slice(0));
+          } catch (e) {
+            console.warn('WebAudio init failed, falling back to HTMLAudio:', e);
+            audioBuffer = null;
+            audioCtx = null;
+          }
+        }
+
+        function playBufferedClick() {
+          if (audioCtx && audioBuffer) {
+            // Si el AudioContext está suspendido, un clic del usuario lo reanudará.
+            if (audioCtx.state === 'suspended') {
+              audioCtx.resume();
+            }
+            try {
+              const src = audioCtx.createBufferSource();
+              src.buffer = audioBuffer;
+              const gain = audioCtx.createGain();
+              gain.gain.value = 0.9;
+              src.connect(gain).connect(audioCtx.destination);
+              // Iniciar la reproducción saltando los primeros 5ms para evitar el silencio inicial del archivo.
+              src.start(0, 0.005);
+            } catch (e) {
+              // ignore
+            }
+          } else {
+            // fallback to HTMLAudio element for older browsers
+            const el = document.getElementById('ui-sound');
+            if (el) {
+              try {
+                el.currentTime = 0;
+                el.play().catch(() => { });
+              } catch (e) { }
+            }
+          }
+        }
+
+        // initialize and attach handlers
+        initAudio();
+        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-modal, #close-chest, #book-close-btn, #map-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld');
+        els.forEach(el => el.addEventListener('click', playBufferedClick));
+      })();
+    });
+  </script>
+</body>
+
+</html>

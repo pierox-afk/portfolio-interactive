@@ -1,0 +1,71 @@
+Buenos Aires
+September 10, 2002
+Hombre
+linkedin.com/in/pierosansossio-
+590877291
+Skills
+JavaScript
+React
+HTML5
+CSS3
+DOM Manipulación
+Desarrollo UI/UX
+Github
+React Testing Library
+Redux Toolkit
+Tailwind CSS
+RESTful APIs
+Responsive Design
+Jest
+Vue.js
+Piero Sansossio
+Profile
+Frontend Developer with 3 years of experience creating engaging, interactive,
+and high-performance user interfaces (UI). Passionate about user experience
+(UX) and responsive design, I specialize in translating design concepts and
+wireframes into high-quality code using HTML5, CSS3, and modern
+JavaScript (ES6+). Proficient in frameworks like React and Angular to build
+scalable and efficient web applications. Always seeking best practices to
+optimize loading speed and ensure web accessibility.
+Education
+Bachellors Oct 2019 - Present
+Jose Antonio Paez University, Valencia,Venezuela
+Development of skills for performance optimization and accessibility in
+web applications.
+Comprehensive understanding of frontend application architecture and its
+integration with backend services.
+Study of markup and style languages for the creation of accessible and
+user-friendly interfaces.
+Implementation of advanced debugging and testing techniques in
+JavaScript environments to improve code quality.
+Integration of RESTful APIs into frontend applications for effective
+communication with servers and databases.
+Analysis of usability and user behavior to design intuitive and efficient
+interfaces.
+Advanced study of React.js and state management using Redux Toolkit
+to build scalable frontend applications.
+Employment
+Mid-Level Frontend Developer May 2024 - Present
+Viajes Azteca Digital, Guadalajara
+Developed the user interface for a travel booking platform using React.js
+and managed the application's global state with Redux Toolkit.
+Implemented responsive and modern designs using Tailwind CSS,
+ensuring a seamless user experience on both desktop and mobile
+devices.
+Collaborated with the backend team to define and consume RESTful
+APIs for searching flights, hotels, and activities.
+Wrote unit and integration tests with Jest and React Testing Library to
+ensure the quality and stability of components.
+Junior Frontend Developer Jan 2023 - Apr 2024
+Innovatec Argentina, Buenos Aires
+Developed and maintained UI components for various client web
+applications using HTML5, CSS3 (Sass), and JavaScript (ES6+).
+Collaborated on migrating a legacy jQuery project to Vue.js, improving
+code maintainability and scalability.
+Implemented responsive designs, ensuring cross-browser and crossdevice
+compatibility.
+Consumed REST services to display dynamic information in user
+interfaces.
+Languages
+Inglés
+Español

@@ -1,0 +1,1157 @@
+.mc-menu-bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 950;
+  filter: contrast(1.1) brightness(0.9);
+  image-rendering: pixelated;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
+}
+.mc-menu-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: 128px 128px;
+  z-index: 800;
+  opacity: 1;
+  image-rendering: pixelated;
+  transition: opacity 0.5s ease-out;
+}
+.mc-menu-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 18px;
+  box-shadow: none;
+  padding: 2.5em 3em 10em 3em;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 760px;
+}
+
+:root {
+  --color-base: #7f7f7f;
+  --color-border: #3c3c3c;
+  --color-highlight: #ffffff;
+  --font-color: #e9e9e9;
+  --font-shadow: rgba(0, 0, 0, 0.6);
+  --title-gray: #e6e6e6;
+  --subtitle-gray: #dcdcdc;
+}
+/* .mc-menu-title removed (replaced by .mc-menu-header / .menu-title-main) */
+.mc-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+  width: 100%;
+}
+
+.mc-menu-btn {
+  width: 100%;
+  font-family: "Minecraft", monospace;
+  padding: 14px 20px;
+  background-color: var(--color-base);
+  color: var(--font-color);
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 1px 1px 0 var(--color-border); /* Sombra gris oscuro en lugar de negro */
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-align: center;
+  box-shadow: inset 0 2px 0 var(--color-highlight),
+    inset 0 -2px 0 var(--color-border), inset 2px 0 0 var(--color-highlight),
+    inset -2px 0 0 var(--color-border), 6px 6px 0 #000;
+  transition: background-color 0.1s, box-shadow 0.08s, transform 0.06s;
+}
+.mc-menu-btn:hover {
+  background-color: #c0c0c0;
+}
+.mc-menu-btn:active {
+  background-color: #909090;
+  box-shadow: inset 0 2px 0 var(--color-border),
+    inset 0 -2px 0 var(--color-highlight), inset 2px 0 0 var(--color-border),
+    inset -2px 0 0 var(--color-highlight);
+  transform: translate(2px, 2px);
+}
+
+/* Large stacked buttons styling */
+.mc-menu-btn.large {
+  padding: 22px 26px;
+  font-size: 30px; /* Letra más grande */
+  min-height: 98px; /* botones mucho más grandes */
+  letter-spacing: 1px; /* Más espaciado entre letras */
+}
+
+/* Ensure small buttons are half width and smaller */
+.mc-menu-btn.small-button {
+  /* Hacemos los botones más pequeños */
+  width: 48%; /* Cada botón ocupa casi la mitad del espacio */
+  padding: 10px 12px; /* Padding horizontal normal */
+  font-size: 20px;
+}
+
+/* Bottom menu (dos botones pequeños como Options / Quit) */
+.bottom-menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Los empuja a los extremos */
+  margin-top: 15px;
+}
+
+.ChestModel {
+  position: relative;
+  width: 340px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform-style: preserve-3d;
+  user-select: none;
+}
+
+.ChestBase {
+  width: 320px;
+  height: 120px;
+  background: url("assets/textures/assets/minecraft/textures/block/chest.png")
+    center/cover;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 32px #000a;
+  position: relative;
+  z-index: 1;
+}
+
+.ChestLid {
+  width: 320px;
+  height: 80px;
+  background: url("assets/textures/assets/minecraft/textures/block/chest_top.png")
+    center/cover;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 4px 16px #000a;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: bottom center;
+  transition: transform 0.7s cubic-bezier(0.7, 1.5, 0.5, 1);
+  z-index: 2;
+}
+
+.PageContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24, 24, 24, 0.98);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s;
+}
+.PageContent.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.PageContent.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.portfolio-content {
+  color: #fff;
+  font-family: "Minecraft", monospace;
+  text-align: center;
+  background: #222c;
+  border-radius: 16px;
+  padding: 2em 3em;
+  box-shadow: 0 4px 32px #000a;
+  font-size: 1.3rem;
+}
+.open-chest-btn {
+  font-family: "Minecraft", sans-serif;
+  font-size: 22px;
+  background: url("assets/textures/assets/minecraft/textures/block/oak_planks.png");
+  background-size: 48px 48px;
+  color: #111;
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #555;
+  border-right: 3px solid #555;
+  box-shadow: 6px 6px 0 #00000055;
+  padding: 16px 32px;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+.open-chest-btn:active {
+  transform: translate(2px, 2px);
+  border-top: 3px solid #555;
+  border-left: 3px solid #555;
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+@font-face {
+  font-family: "Minecraft";
+  src: url("assets/fonts/Minecraft.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MinecrafterAlt";
+  src: url("assets/textures/Minecrafter.Alt.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.mc-menu-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -5rem;
+  margin-bottom: 0.2rem;
+}
+
+.menu-title-main {
+  font-family: "MinecrafterAlt", "Minecraft", sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.9;
+  margin: 0;
+  color: var(--title-gray);
+  -webkit-text-stroke: 4px #000;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000;
+  letter-spacing: -0.03em;
+  transform: translateZ(0);
+  user-select: none;
+}
+
+.mc-menu-subtitle {
+  font-family: "Minecraft", monospace;
+  /* hacer más grande y más ancha */
+  display: inline-block; /* para aplicar transform */
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  color: var(--color-base);
+  margin-top: 0;
+  -webkit-text-stroke: 2px #000;
+  /* removed text-shadow per user request to eliminate black shadow on button text */
+  letter-spacing: 0.6px;
+  font-weight: 800;
+  transform-origin: center;
+  transform: scaleX(1.08);
+  user-select: none;
+}
+/* Image-based titles supplied by user */
+.menu-title-image {
+  width: min(86vw, 820px);
+  max-width: 820px;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  margin: 0 auto 0 auto; /* remove bottom gap */
+}
+.menu-subtitle-image {
+  width: min(68vw, 520px);
+  max-width: 520px;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  margin: -5rem auto 0 auto; /* Aumentamos el margen negativo para juntarlos más */
+  transform: scaleX(1.05);
+}
+body {
+  margin: 0;
+  font-family: "Minecraft", sans-serif;
+  /* cielo estilo Minecraft */
+  background: linear-gradient(#78c0ff, #9ad6ff 40%, #87ceeb 100%);
+  color: white;
+  transition: background 1s ease-in-out;
+}
+body.nether-bg {
+  /* Fondo oscuro y rojizo para el Nether */
+  background: #500808;
+  overflow: auto;
+}
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  outline: none;
+  image-rendering: pixelated;
+  z-index: 1; /* Asegura que el canvas esté sobre el fondo del body */
+}
+.instructions {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  z-index: 10;
+  text-shadow: 2px 2px #00000080;
+  transition: opacity 0.5s ease-in;
+}
+.instructions p {
+  margin: 5px 0;
+}
+
+/* Cabecera fija con estilo "pixel" */
+.brand {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 40;
+  background: #c6c6c6;
+  color: #222;
+  padding: 8px 12px;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-bottom: 3px solid #555;
+  border-right: 3px solid #555;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 6px 6px 0 #00000055;
+  image-rendering: pixelated;
+  transition: opacity 0.5s ease-in;
+}
+
+/* Toolbelt */
+.toolbelt {
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  z-index: 40;
+  display: flex;
+  gap: 8px;
+  transition: opacity 0.5s ease-in;
+}
+.tool-btn {
+  background: #c6c6c6;
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #555;
+  border-right: 3px solid #555;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+.tool-btn.active {
+  box-shadow: none; /* quitar sombreado externo */
+}
+
+/* Chest modal */
+#chest-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 200;
+}
+#chest-modal.hidden {
+  display: none;
+}
+.chest-content {
+  width: 560px; /* wider to fit a 9-column chest feel */
+  background: #c6c6c6;
+  border: 3px solid #111;
+  padding: 14px;
+  image-rendering: pixelated;
+}
+.chest-items {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr); /* 9 slots per row like Minecraft */
+  gap: 6px;
+  margin-top: 10px;
+}
+.chest-slot {
+  width: 48px;
+  height: 48px;
+  background: #8b6f4a; /* chest slot background */
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #555;
+  border-right: 3px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}
+.chest-slot img {
+  width: 38px;
+  height: 38px;
+  image-rendering: pixelated;
+}
+.chest-slot.occupied {
+  background: #efe4c7;
+}
+.chest-tooltip {
+  position: absolute;
+  background: rgba(198, 198, 198, 0.96);
+  color: #111;
+  padding: 8px 10px;
+  border: 2px solid #111;
+  font-size: 13px;
+  display: none;
+  z-index: 9999;
+}
+
+/* world labels (projected from 3D to 2D) */
+.world-label {
+  position: fixed;
+  transform: translate(-50%, -120%);
+  background: rgba(198, 198, 198, 0.95);
+  color: #111;
+  padding: 6px 8px;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #555;
+  border-right: 2px solid #555;
+  z-index: 50;
+  font-size: 13px;
+  pointer-events: none;
+  display: none; /* shown when positioned */
+}
+
+/* tarjetas de proyecto (cuando aparezcan en HTML) */
+.card {
+  background: url("assets/textures/assets/minecraft/textures/block/stone_inf.png");
+  background-size: cover;
+  color: #111;
+  padding: 12px;
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #555;
+  border-right: 3px solid #555;
+  width: 260px;
+  image-rendering: pixelated;
+}
+
+/* Hero / portada */
+.hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 9;
+  pointer-events: none; /* dejar controles al canvas */
+}
+.hero .title {
+  font-size: 48px;
+  color: #fff;
+  text-shadow: 4px 4px 0 #000, 6px 6px 0 #2b2b2b;
+  letter-spacing: 2px;
+  pointer-events: auto;
+}
+.hero .subtitle {
+  margin-top: 8px;
+  color: #f3f3f3;
+  font-size: 16px;
+  text-shadow: 2px 2px 0 #00000088;
+}
+
+/* Botones estilo "pixel" */
+.btn {
+  display: inline-block;
+  margin: 10px 6px;
+  padding: 10px 16px;
+  background: url("assets/textures/assets/minecraft/textures/block/oak_planks.png");
+  background-size: 48px 48px;
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-bottom: 3px solid #555555;
+  border-right: 3px solid #555555;
+  box-shadow: none; /* quitar sombreado externo */
+  image-rendering: pixelated;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.btn:active {
+  transform: translate(2px, 2px);
+  border-top: 3px solid #555555;
+  border-left: 3px solid #555555;
+  border-bottom: 3px solid #ffffff;
+  border-right: 3px solid #ffffff;
+}
+
+/* Grid de proyectos (si agregas elementos HTML) */
+.project-grid {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  z-index: 11;
+}
+.project-card {
+  width: 220px;
+  height: 140px;
+  background: url("assets/textures/assets/minecraft/textures/block/grass_block_top.png");
+  background-size: cover;
+  padding: 8px;
+  box-sizing: border-box;
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #555;
+  border-right: 3px solid #555;
+  color: #111;
+  image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.project-card h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.resume {
+  /* make resume part of the normal document flow so the page is scrollable */
+  position: relative;
+  margin: 90px 60px 60px 60px;
+  display: block;
+  z-index: 20;
+  pointer-events: auto;
+}
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.resume-header h1 {
+  margin: 0;
+  font-size: 36px;
+  color: #fff;
+  text-shadow: 4px 4px 0 #000;
+}
+.resume-meta div {
+  color: #fff;
+  opacity: 0.95;
+  margin: 2px 0;
+}
+.resume-body {
+  display: flex;
+  gap: 16px;
+}
+.resume-body.single-column {
+  flex-direction: column;
+  font-size: 1.1em;
+}
+.resume-left {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.resume-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.resume .card {
+  background: rgba(198, 198, 198, 0.95);
+  padding: 12px;
+  color: #111;
+  border: 3px solid #111;
+}
+.resume .card h3 {
+  margin-top: 0;
+}
+.skills {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.skills li {
+  background: #fff;
+  padding: 6px 8px;
+  border: 2px solid #ddd;
+  font-size: 13px;
+}
+.muted {
+  color: #333;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 900px) {
+  .resume {
+    left: 12px;
+    right: 12px;
+    top: 80px;
+    bottom: 40px;
+  }
+  .resume-left {
+    width: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .resume {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    margin: 12px;
+  }
+  .resume-body {
+    flex-direction: column;
+  }
+  .resume-left {
+    width: 100%;
+  }
+}
+
+/* Ajustes responsive */
+@media (max-width: 700px) {
+  .hero .title {
+    font-size: 28px;
+  }
+  .project-grid {
+    right: 10px;
+    bottom: 10px;
+    gap: 8px;
+  }
+  .project-card {
+    width: 160px;
+    height: 110px;
+  }
+  .instructions {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+#info-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+#info-modal.hidden {
+  display: none;
+}
+.modal-content {
+  background-color: #c6c6c6;
+  border: 2px solid #1e1e1e;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  outline: 2px solid #ffffff;
+  position: relative;
+  image-rendering: pixelated;
+}
+#close-modal {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: #c6c6c6;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #555555;
+  border-right: 2px solid #555555;
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: #333;
+  text-shadow: none;
+  line-height: 28px;
+  text-align: center;
+}
+#close-modal:hover {
+  background-color: #f0f0f0;
+}
+.modal-content h2,
+.modal-content p {
+  color: #333;
+  text-shadow: 2px 2px #dddddd;
+}
+.modal-content a {
+  display: inline-block;
+  background-color: #c6c6c6;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #555555;
+  border-right: 2px solid #555555;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  text-shadow: 2px 2px #dddddd;
+  margin-top: 10px;
+}
+.modal-content a:hover {
+  background-color: #dcdcdc;
+}
+.modal-content a:active {
+  background-color: #c6c6c6;
+  border-top: 2px solid #555555;
+  border-left: 2px solid #555555;
+  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+}
+
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --- Portal Animation --- */
+.portal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+.portal-overlay.active {
+  opacity: 1;
+}
+.portal-frame {
+  width: 320px;
+  height: 480px;
+  position: relative;
+  background: radial-gradient(circle, #c45cff 10%, #8e2de2 50%, #4a00e0 100%);
+  border: 80px solid #1a1421;
+  animation: portal-swirl 4s ease-in-out infinite;
+  box-shadow: 0 0 80px #c45cff, inset 0 0 40px #8e2de2;
+}
+@keyframes portal-swirl {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* --- Book View (Resume) --- */
+.book-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2500px;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+}
+.book-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.book-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.book-close-btn {
+  /* Estilo de botón de Minecraft */
+  font-family: "Minecraft", monospace;
+  padding: 10px 20px;
+  background-color: var(--color-base);
+  color: var(--font-color);
+  font-size: 18px;
+  text-shadow: 1px 1px 0 var(--color-border);
+  cursor: pointer;
+  border: none;
+  box-shadow: inset 0 2px 0 var(--color-highlight),
+    inset 0 -2px 0 var(--color-border), inset 2px 0 0 var(--color-highlight),
+    inset -2px 0 0 var(--color-border), 4px 4px 0 #00000080;
+  transition: all 0.1s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.book-container.visible .book-close-btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s 0.8s, transform 0.5s 0.8s;
+}
+.book-close-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: inset 0 1px 0 var(--color-border),
+    inset 0 -1px 0 var(--color-highlight), inset 1px 0 0 var(--color-border),
+    inset -1px 0 0 var(--color-highlight);
+}
+
+/* --- Animated Book --- */
+.book {
+  width: 800px; /* Hacemos el libro más ancho */
+  height: 600px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateX(-80px) rotateY(20deg); /* Aumentamos la compensación para centrarlo mejor */
+  transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+/* La animación de apertura ahora es controlada por la clase .open */
+.book.open {
+  transform: rotateY(-180deg);
+}
+.book-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* Usamos la textura de un libro de Minecraft */
+  background: url("assets/textures/assets/minecraft/textures/item/book.png")
+      center/cover no-repeat,
+    #39291a; /* Color de fondo para rellenar */
+  border: 4px solid #39291a; /* Borde que coincide con la textura */
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden; /* Oculta la parte trasera */
+  z-index: 10;
+}
+/* Añadimos una "cara interior" a la cubierta para ocultar el fondo marrón al girar */
+.book-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Mismo color que el fondo del book-container */
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  z-index: -1;
+}
+/* La animación de la cubierta también usa .open */
+.book.open .book-cover {
+  transform: rotateY(-180deg);
+  pointer-events: none;
+}
+.book-cover-content {
+  text-align: center;
+  color: #f9f2e6;
+  text-shadow: 2px 2px #3a1a02;
+  transition: opacity 0.3s ease-out; /* Añadimos una transición suave */
+}
+.book-cover-content h2 {
+  font-size: 32px;
+  margin: 0;
+}
+.book-cover-content span {
+  font-size: 18px;
+}
+.book.open .book-cover-content {
+  opacity: 0; /* Ocultamos el texto cuando el libro está abierto */
+}
+.book-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f2e6;
+  color: #333;
+  display: flex;
+  transform: rotateY(180deg); /* Corregimos la inversión del texto */
+  /* Creamos el marco marrón con una sombra interior */
+  box-shadow: inset 0 0 0 10px #5a3a22;
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+  overflow: hidden;
+  backface-visibility: hidden; /* Evita que el texto se vea al revés durante el giro */
+}
+
+.book-page-left,
+.book-page-right {
+  width: 50%;
+  padding: 25px 30px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.book-page-left {
+  border-right: 1px dashed #d3c8b3;
+}
+
+/* --- Map View (Contact) --- */
+.map-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+}
+.map-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.map-content {
+  background: url("assets/textures/map_background.png") center/cover; /* Textura de mapa */
+  width: 90%;
+  max-width: 600px;
+  height: 70vh;
+  max-height: 450px;
+  border: 8px solid #5a3a22; /* Borde de madera */
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  position: relative;
+  image-rendering: pixelated;
+}
+.map-close-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 28px;
+  background-color: #c6c6c6;
+  border: 2px solid #1e1e1e;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: #333;
+  line-height: 28px;
+  text-align: center;
+  z-index: 10;
+}
+.map-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  text-align: center;
+}
+.map-marker img {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+}
+.map-marker span {
+  display: block;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px #000;
+  margin-top: 4px;
+}
+
+/* --- Map Decorations --- */
+.map-decoration {
+  position: absolute;
+  image-rendering: pixelated;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.map-decoration.compass {
+  width: 64px;
+  height: 64px;
+  top: 15px;
+  right: 15px;
+  opacity: 0.9;
+}
+
+/* --- Nether Projects View --- */
+.nether-projects-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.5s 0.3s ease-out;
+  pointer-events: none;
+}
+.nether-projects-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nether-content {
+  width: 90%;
+  max-width: 1000px;
+  height: 90vh;
+  background: url("assets/textures/assets/minecraft/textures/block/netherrack.png");
+  background-size: 64px;
+  border: 8px solid #3a1a02;
+  border-image: url("assets/textures/assets/minecraft/textures/block/nether_bricks.png")
+    16 repeat;
+  padding: 30px 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  position: relative;
+  color: #ffc4c4;
+  text-shadow: 2px 2px #3a1a02;
+}
+.nether-content h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 0;
+}
+.nether-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #ffc4c4;
+  cursor: pointer;
+  text-shadow: 2px 2px #3a1a02;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.project-card-nether {
+  background-color: rgba(40, 10, 10, 0.8);
+  border: 4px solid #3a1a02;
+  padding: 15px;
+  text-align: center;
+}
+.project-card-nether img {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  margin-bottom: 10px;
+}
+.project-card-nether a {
+  color: #ff8d8d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* --- Nether Projects View --- */
+.nether-projects-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.5s 0.3s ease-out;
+  pointer-events: none;
+}
+.nether-projects-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nether-content {
+  width: 90%;
+  max-width: 1000px;
+  height: 90vh;
+  background: url("assets/textures/assets/minecraft/textures/block/netherrack.png");
+  background-size: 64px;
+  border: 8px solid #3a1a02;
+  /* Cambiamos el borde a Glowstone para un look más del Nether */
+  border-image: url("assets/textures/assets/minecraft/textures/block/glowstone.png")
+    16 repeat;
+  padding: 30px 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  position: relative;
+  color: #ffc4c4;
+  text-shadow: 2px 2px #3a1a02;
+}
+.nether-content h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 0;
+}
+.nether-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #ffc4c4;
+  cursor: pointer;
+  text-shadow: 2px 2px #3a1a02;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.project-card-nether {
+  background-color: rgba(40, 10, 10, 0.8);
+  border: 4px solid #3a1a02;
+  padding: 15px;
+  text-align: center;
+}
+.project-card-nether img {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  margin-bottom: 10px;
+}
+.project-card-nether a {
+  color: #ff8d8d;
+  text-decoration: none;
+  font-weight: bold;
+}
+.nether-btn {
+  margin-top: 30px;
+  background-color: #4a2a12; /* Color de ladrillo del Nether */
+  color: #ffc4c4;
+  text-shadow: 1px 1px 0 #2b1a0a;
+  box-shadow: inset 0 2px 0 #6a4a32, inset 0 -2px 0 #2b1a0a,
+    inset 2px 0 0 #6a4a32, inset -2px 0 0 #2b1a0a, 6px 6px 0 #000;
+}
+.nether-btn:hover {
+  background-color: #6a4a32;
+}
+.nether-btn:active {
+  background-color: #3a1a02;
+  box-shadow: inset 0 2px 0 #2b1a0a, inset 0 -2px 0 #6a4a32,
+    inset 2px 0 0 #2b1a0a, inset -2px 0 0 #6a4a32;
+}

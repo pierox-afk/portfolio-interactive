@@ -1,0 +1,90 @@
+{
+  "user": {
+    "name": "Piero",
+    "title": "Frontend Developer"
+  },
+  "interactiveBlocks": {
+    "aboutMe": {
+      "title": "About Me",
+      "description": "I'm a developer passionate about creating interactive web experiences. I love combining code and creativity.",
+      "link": "#"
+    },
+    "project": {
+      "title": "My Best Project",
+      "description": "This is an awesome project I made using Three.js.",
+      "link": "#"
+    },
+    "chest": {
+      "type": "chest",
+      "items": [
+        {
+          "name": "Resume (PDF)",
+          "icon": "assets/textures/assets/minecraft/textures/block/book_box_a.png",
+          "description": "Downloadable resume (PDF) — frontend, UX, 3D web.",
+          "link": "#"
+        },
+        {
+          "name": "GitHub",
+          "icon": "assets/textures/assets/minecraft/textures/block/bookshelf.png",
+          "description": "My GitHub with projects and demos.",
+          "link": "#"
+        },
+        {
+          "name": "Secret Demo",
+          "icon": "assets/textures/assets/minecraft/textures/block/diamond_block.png",
+          "description": "A small interactive demo packed inside the chest.",
+          "link": "#"
+        },
+        {
+          "name": "Contact",
+          "icon": "assets/textures/assets/minecraft/textures/block/enchanting_table_top.png",
+          "description": "Contact links and freelance availability.",
+          "link": "#"
+        }
+      ]
+    },
+    "ore": {
+      "type": "ore",
+      "title": "Hidden Mine",
+      "description": "You found a vein. Use a Diamond Pickaxe to mine and reveal a demo.",
+      "link": "#"
+    }
+  },
+  "projects": [
+    {
+      "title": "Travel Booking Platform",
+      "description": "UI development for a travel platform using React.js and Redux Toolkit.",
+      "link": "https://github.com/PieroSansossio/your-project-repo-1",
+      "icon": "assets/textures/assets/minecraft/textures/item/map.png"
+    },
+    {
+      "title": "Legacy System Migration",
+      "description": "Collaborated on migrating a legacy jQuery project to a modern Vue.js stack.",
+      "link": "https://github.com/PieroSansossio/your-project-repo-2",
+      "icon": "assets/textures/assets/minecraft/textures/item/writable_book.png"
+    },
+    {
+      "title": "This Portfolio",
+      "description": "An interactive portfolio built with Three.js and vanilla JavaScript.",
+      "link": "https://github.com/PieroSansossio/portfolio",
+      "icon": "assets/textures/assets/minecraft/textures/block/crafting_table_top.png"
+    }
+  },
+  "resume": {
+    "name": "Piero Sansossio",
+    "location": "Buenos Aires",
+    "birthDate": "September 10, 2002",
+    "gender": "Hombre",
+    "linkedin": "https://linkedin.com/in/pierosansossio-590877291",
+    "upwork": "#",
+    "phone": "Contact for details",
+    "profile": "Frontend Developer with 4 years of experience dedicated to creating scalable, interactive web applications with a solid architecture. My primary focus is on code refactoring and legacy system migration to guarantee production quality and long-term performance.",
+    "profileSummary": "I seek challenging opportunities where my architectural expertise and drive for continuous improvement can generate a significant impact on product stability and success.",
+    "education": {
+      "degree": "Bachelors",
+      "institution": "Jose Antonio Paez University, Valencia, Venezuela",
+      "period": "Oct 2019 - Present",
+      "description": "My knowledge is built on a unique combination of formal education and specialized self-learning. I have developed a comprehensive understanding of application architecture and performance optimization through my university education, complemented by advanced studies in React.js and Redux Toolkit. My technical skills in high-demand areas like TypeScript, WebSockets, and Testing have been greatly enhanced by continuous, hands-on self-education through platforms such as Platzi, Coursera, and YouTube."
+    }
+  }
+}
