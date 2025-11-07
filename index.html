@@ -48,6 +48,11 @@
     </div>
   </div>
 
+  <div class="instructions hidden">
+    <p>Use WASD to move</p>
+    <p>Space / Shift to ascend/descend</p>
+  </div>
+
   <!-- Portal Overlay for dimension change -->
   <div id="portal-overlay" class="portal-overlay">
     <div class="portal-frame"></div>
@@ -129,6 +134,8 @@
     </div>
   </div>
 
+
+
   <script type="module">
     import * as THREE from './lib/three.js-master/build/three.module.js';
     // expose globally for legacy scripts that expect `THREE` on window
@@ -169,7 +176,6 @@
       });
     })();
   </script>
-  <script src="main.js"></script>
   <script>
     // Pequeñas interacciones: abrir / cerrar about y smooth scroll
     document.addEventListener('DOMContentLoaded', async function () {
@@ -372,7 +378,7 @@
             <h3>My Growth Strategy</h3>
             <p>${resumeData.education.description}</p>
             <br>
-            
+            <h3>Key Skills and Added Value</h3>
             <p>${resumeData.profileSummary}</p>
           </div>`;
       }
@@ -446,6 +452,7 @@
       })();
     });
   </script>
+  <script src="main.js"></script>
 </body>
 
 </html>
