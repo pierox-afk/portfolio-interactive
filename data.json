@@ -52,24 +52,24 @@
   },
   "projects": [
     {
-      "title": "Spotify Album Manager",
-      "description": "A web app to manage your saved Spotify albums, built with React, TypeScript, and the Spotify API.",
-      "link": "https://github.com/pierox-afk/spotify-album-manager",
-      "icon": "assets/textures/assets/minecraft/textures/block/jukebox_side.png"
+      "title": "Travel Booking Platform",
+      "description": "UI development for a travel platform using React.js and Redux Toolkit.",
+      "link": "https://github.com/PieroSansossio/your-project-repo-1",
+      "icon": "assets/textures/assets/minecraft/textures/item/map.png"
     },
     {
-      "title": "PokéAPI Explorer",
-      "description": "An interactive Pokémon encyclopedia using the PokéAPI to fetch and display data on different Pokémon.",
-      "link": "https://github.com/pierox-afk/POKE-API",
-      "icon": "assets/textures/assets/minecraft/textures/item/compass_00.png"
+      "title": "Legacy System Migration",
+      "description": "Collaborated on migrating a legacy jQuery project to a modern Vue.js stack.",
+      "link": "https://github.com/PieroSansossio/your-project-repo-2",
+      "icon": "assets/textures/assets/minecraft/textures/item/writable_book.png"
     },
     {
       "title": "This Portfolio",
       "description": "An interactive portfolio built with Three.js and vanilla JavaScript.",
       "link": "https://github.com/PieroSansossio/portfolio",
-      "icon": "assets/textures/assets/minecraft/textures/block/crafting_table_front.png"
+      "icon": "assets/textures/assets/minecraft/textures/block/crafting_table_top.png"
     }
-  ],
+  },
   "resume": {
     "name": "Piero Sansossio",
     "location": "Buenos Aires",
@@ -80,23 +80,6 @@
     "phone": "Contact for details",
     "profile": "Frontend Developer with 4 years of experience dedicated to creating scalable, interactive web applications with a solid architecture. My primary focus is on code refactoring and legacy system migration to guarantee production quality and long-term performance.",
     "profileSummary": "I seek challenging opportunities where my architectural expertise and drive for continuous improvement can generate a significant impact on product stability and success.",
-    "skills": [
-      "JavaScript",
-      "React",
-      "HTML5",
-      "CSS3",
-      "DOM Manipulación",
-      "Desarrollo UI/UX",
-      "Github",
-      "React Testing Library",
-      "Redux Toolkit",
-      "Tailwind CSS",
-      "RESTful APIs",
-      "Responsive Design",
-      "Jest",
-      "Vue.js"
-    ],
-    "languages": ["Inglés", "Español"],
     "education": {
       "degree": "Bachelors",
       "institution": "Jose Antonio Paez University, Valencia, Venezuela",

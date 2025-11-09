@@ -270,11 +270,6 @@
   margin: -5rem auto 0 auto; /* Aumentamos el margen negativo para juntarlos más */
   transform: scaleX(1.05);
 }
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
 body {
   margin: 0;
   font-family: "Minecraft", sans-serif;
@@ -284,11 +279,8 @@ body {
   transition: background 1s ease-in-out;
 }
 body.nether-bg {
-  /* Usamos la nueva imagen para el fondo del Nether */
-  /* Escapamos los espacios en el nombre del archivo para asegurar que se cargue */
-  background: url("assets/textures/Minecraft\ Nether\ Red\ 1080p\ Wallpaper\ HDwallpaper.jpg")
-    center/cover no-repeat;
-  background-color: #500808; /* Fallback por si la imagen no carga */
+  /* Fondo oscuro y rojizo para el Nether */
+  background: #500808;
   overflow: auto;
 }
 #bg {
