@@ -5,13 +5,25 @@
   },
   "interactiveBlocks": {
     "aboutMe": {
-      "title": "About Me",
-      "description": "I'm a developer passionate about creating interactive web experiences. I love combining code and creativity.",
+      "title": {
+        "en": "About Me",
+        "es": "Sobre Mí"
+      },
+      "description": {
+        "en": "I'm a developer passionate about creating interactive web experiences. I love combining code and creativity.",
+        "es": "Soy un desarrollador apasionado por crear experiencias web interactivas. Me encanta combinar código y creatividad."
+      },
       "link": "#"
     },
     "project": {
-      "title": "My Best Project",
-      "description": "This is an awesome project I made using Three.js.",
+      "title": {
+        "en": "My Best Project",
+        "es": "Mi Mejor Proyecto"
+      },
+      "description": {
+        "en": "This is an awesome project I made using Three.js.",
+        "es": "Este es un proyecto increíble que hice usando Three.js."
+      },
       "link": "#"
     },
     "chest": {
@@ -52,24 +64,85 @@
   },
   "projects": [
     {
-      "title": "Travel Booking Platform",
-      "description": "UI development for a travel platform using React.js and Redux Toolkit.",
-      "link": "https://github.com/PieroSansossio/your-project-repo-1",
-      "icon": "assets/textures/assets/minecraft/textures/item/map.png"
+      "title": {
+        "en": "Spotify Album Manager",
+        "es": "Gestor de Álbumes de Spotify"
+      },
+      "description": {
+        "en": "A web app to manage your saved Spotify albums, built with React, TypeScript, and the Spotify API.",
+        "es": "Una app web para gestionar tus álbumes guardados de Spotify, creada con React, TypeScript y la API de Spotify."
+      },
+      "longDescription": {
+        "en": "This application allows users to connect to their Spotify account to view, filter, and organize their saved albums. It offers a clean and intuitive interface for managing a large music library, demonstrating strong skills in API integration and state management with Redux.",
+        "es": "Esta aplicación permite a los usuarios conectar su cuenta de Spotify para ver, filtrar y organizar sus álbumes guardados. Ofrece una interfaz limpia e intuitiva para gestionar una gran biblioteca musical, demostrando habilidades en integración de APIs y manejo de estado con Redux."
+      },
+      "link": "https://github.com/pierox-afk/spotify-album-manager",
+      "icon": "assets/textures/assets/minecraft/textures/block/jukebox_side.png",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Redux Toolkit",
+        "Spotify API",
+        "CSS Modules"
+      ],
+      "images": [
+        "assets/textures/spoti/image1.jpg",
+        "assets/textures/spoti/image2.jpg",
+        "assets/textures/spoti/image3.jpg"
+      ]
     },
     {
-      "title": "Legacy System Migration",
-      "description": "Collaborated on migrating a legacy jQuery project to a modern Vue.js stack.",
-      "link": "https://github.com/PieroSansossio/your-project-repo-2",
-      "icon": "assets/textures/assets/minecraft/textures/item/writable_book.png"
+      "title": {
+        "en": "PokéAPI Explorer",
+        "es": "Explorador PokéAPI"
+      },
+      "description": {
+        "en": "An interactive Pokémon encyclopedia using the PokéAPI to fetch and display data on different Pokémon.",
+        "es": "Una enciclopedia interactiva de Pokémon que usa la PokéAPI para obtener y mostrar datos de diferentes Pokémon."
+      },
+      "longDescription": {
+        "en": "An interactive Pokémon encyclopedia built with vanilla JavaScript, HTML, and CSS. It uses the PokéAPI to dynamically fetch and display detailed information about different Pokémon, including their stats, abilities, and types. The project focuses on asynchronous data handling and DOM manipulation.",
+        "es": "Una enciclopedia interactiva de Pokémon construida con JavaScript, HTML y CSS. Usa la PokéAPI para obtener y mostrar dinámicamente información detallada sobre diferentes Pokémon, incluyendo sus estadísticas, habilidades y tipos. El proyecto se centra en el manejo de datos asíncronos y la manipulación del DOM."
+      },
+      "link": "https://github.com/pierox-afk/POKE-API",
+      "icon": "assets/textures/assets/minecraft/textures/item/compass_00.png",
+      "technologies": [
+        "JavaScript (ES6+)",
+        "HTML5",
+        "CSS3",
+        "REST API",
+        "Webpack"
+      ],
+      "images": [
+        "assets/textures/pokem/image1.png",
+        "assets/textures/pokem/image2.png",
+        "assets/textures/pokem/image3.png"
+      ]
     },
     {
-      "title": "This Portfolio",
-      "description": "An interactive portfolio built with Three.js and vanilla JavaScript.",
-      "link": "https://github.com/PieroSansossio/portfolio",
-      "icon": "assets/textures/assets/minecraft/textures/block/crafting_table_top.png"
+      "title": {
+        "en": "This Portfolio",
+        "es": "Este Portafolio"
+      },
+      "description": {
+        "en": "An interactive portfolio built with vanilla JavaScript.",
+        "es": "Un portafolio interactivo construido con JavaScript."
+      },
+      "longDescription": {
+        "en": "The portfolio you are currently viewing. It's an immersive web experience inspired by Minecraft, created from scratch using vanilla JavaScript for all interactions. It features custom animations, sound effects, and a unique 'dimension-travel' theme to navigate between sections.",
+        "es": "El portafolio que estás viendo. Es una experiencia web inmersiva inspirada en Minecraft, creada desde cero usando JavaScript para las interacciones. Incluye animaciones, efectos de sonido y un tema de 'viaje dimensional' para navegar."
+      },
+      "link": "https://github.com/pierox-afk/portfolio-interactive",
+      "icon": "assets/textures/assets/minecraft/textures/block/crafting_table_front.png",
+      "technologies": ["JavaScript", "HTML5", "CSS3", "Web Audio API"],
+      "images": [
+        "assets/textures/portfolio/image1.jpg",
+        "assets/textures/portfolio/image2.jpg",
+        "assets/textures/portfolio/image3.jpg",
+        "assets/textures/portfolio/image4.jpg"
+      ]
     }
-  },
+  ],
   "resume": {
     "name": "Piero Sansossio",
     "location": "Buenos Aires",
@@ -78,13 +151,39 @@
     "linkedin": "https://linkedin.com/in/pierosansossio-590877291",
     "upwork": "#",
     "phone": "Contact for details",
-    "profile": "Frontend Developer with 4 years of experience dedicated to creating scalable, interactive web applications with a solid architecture. My primary focus is on code refactoring and legacy system migration to guarantee production quality and long-term performance.",
-    "profileSummary": "I seek challenging opportunities where my architectural expertise and drive for continuous improvement can generate a significant impact on product stability and success.",
+    "profile": {
+      "en": "Frontend Developer with 4 years of experience dedicated to creating scalable, interactive web applications with a solid architecture. My primary focus is on code refactoring and legacy system migration to guarantee production quality and long-term performance.",
+      "es": "Desarrollador Frontend con 4 años de experiencia dedicado a crear aplicaciones web escalables e interactivas con una arquitectura sólida. Mi enfoque principal es la refactorización de código y la migración de sistemas heredados para garantizar la calidad en producción y el rendimiento a largo plazo."
+    },
+    "profileSummary": {
+      "en": "I seek challenging opportunities where my architectural expertise and drive for continuous improvement can generate a significant impact on product stability and success.",
+      "es": "Busco oportunidades desafiantes donde mi experiencia en arquitectura y mi impulso por la mejora continua puedan generar un impacto significativo en la estabilidad y el éxito del producto."
+    },
+    "skills": [
+      "JavaScript",
+      "React",
+      "HTML5",
+      "CSS3",
+      "DOM Manipulación",
+      "Desarrollo UI/UX",
+      "Github",
+      "React Testing Library",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "RESTful APIs",
+      "Responsive Design",
+      "Jest",
+      "Vue.js"
+    ],
+    "languages": ["Inglés", "Español"],
     "education": {
       "degree": "Bachelors",
       "institution": "Jose Antonio Paez University, Valencia, Venezuela",
       "period": "Oct 2019 - Present",
-      "description": "My knowledge is built on a unique combination of formal education and specialized self-learning. I have developed a comprehensive understanding of application architecture and performance optimization through my university education, complemented by advanced studies in React.js and Redux Toolkit. My technical skills in high-demand areas like TypeScript, WebSockets, and Testing have been greatly enhanced by continuous, hands-on self-education through platforms such as Platzi, Coursera, and YouTube."
+      "description": {
+        "en": "My knowledge is built on a unique combination of formal education and specialized self-learning. I have developed a comprehensive understanding of application architecture and performance optimization through my university education, complemented by advanced studies in React.js and Redux Toolkit. My technical skills in high-demand areas like TypeScript, WebSockets, and Testing have been greatly enhanced by continuous, hands-on self-education through platforms such as Platzi, Coursera, and YouTube.",
+        "es": "Mi conocimiento se basa en una combinación única de educación formal y autoaprendizaje especializado. He desarrollado una comprensión integral de la arquitectura de aplicaciones y la optimización del rendimiento a través de mi educación universitaria, complementada con estudios avanzados en React.js y Redux Toolkit. Mis habilidades técnicas en áreas de alta demanda como TypeScript, WebSockets y Testing se han visto potenciadas por la autoeducación continua y práctica en plataformas como Platzi, Coursera y YouTube."
+      }
     }
   }
 }

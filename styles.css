@@ -48,7 +48,7 @@
   --title-gray: #e6e6e6;
   --subtitle-gray: #dcdcdc;
 }
-/* .mc-menu-title removed (replaced by .mc-menu-header / .menu-title-main) */
+
 .mc-menu-buttons {
   display: flex;
   flex-direction: column;
@@ -64,7 +64,8 @@
   color: var(--font-color);
   font-size: 20px;
   font-weight: 700;
-  text-shadow: 1px 1px 0 var(--color-border); /* Sombra gris oscuro en lugar de negro */
+
+  text-shadow: 1px 1px 0 var(--color-border);
   cursor: pointer;
   border: none;
   outline: none;
@@ -85,28 +86,76 @@
   transform: translate(2px, 2px);
 }
 
-/* Large stacked buttons styling */
 .mc-menu-btn.large {
   padding: 22px 26px;
-  font-size: 30px; /* Letra más grande */
-  min-height: 98px; /* botones mucho más grandes */
-  letter-spacing: 1px; /* Más espaciado entre letras */
+
+  min-height: 98px;
+
+  font-size: 30px;
+  min-height: 98px;
+  letter-spacing: 1px;
 }
 
-/* Ensure small buttons are half width and smaller */
 .mc-menu-btn.small-button {
-  /* Hacemos los botones más pequeños */
-  width: 48%; /* Cada botón ocupa casi la mitad del espacio */
-  padding: 10px 12px; /* Padding horizontal normal */
+  width: 48%;
+
+  width: 48%;
+  padding: 10px 12px;
   font-size: 20px;
 }
 
-/* Bottom menu (dos botones pequeños como Options / Quit) */
 .bottom-menu {
   width: 100%;
   display: flex;
-  justify-content: space-between; /* Los empuja a los extremos */
+
+  justify-content: space-between;
   margin-top: 15px;
+}
+
+.language-switcher {
+  position: fixed;
+  top: 15px;
+
+  z-index: 1000;
+  right: 15px;
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+}
+
+.language-switcher .mc-menu-btn.small-button {
+  width: auto;
+  padding: 10px 12px;
+  font-size: 18px;
+
+  min-width: 120px;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: var(--color-base);
+  border: 2px solid var(--color-border);
+  box-shadow: 4px 4px 0 #00000080;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 100%;
+}
+.lang-option {
+  font-family: "Minecraft", monospace;
+  background-color: transparent;
+  border: none;
+  color: var(--font-color);
+  text-shadow: 1px 1px 0 var(--color-border);
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+.lang-option:hover {
+  background-color: #c0c0c0;
 }
 
 .ChestModel {
@@ -239,27 +288,29 @@
 
 .mc-menu-subtitle {
   font-family: "Minecraft", monospace;
-  /* hacer más grande y más ancha */
-  display: inline-block; /* para aplicar transform */
+
+  display: inline-block;
+  display: inline-block;
   font-size: clamp(1.4rem, 3.5vw, 2.4rem);
   color: var(--color-base);
   margin-top: 0;
   -webkit-text-stroke: 2px #000;
-  /* removed text-shadow per user request to eliminate black shadow on button text */
+
   letter-spacing: 0.6px;
   font-weight: 800;
   transform-origin: center;
   transform: scaleX(1.08);
   user-select: none;
 }
-/* Image-based titles supplied by user */
+
 .menu-title-image {
   width: min(86vw, 820px);
   max-width: 820px;
   height: auto;
   display: block;
   image-rendering: pixelated;
-  margin: 0 auto 0 auto; /* remove bottom gap */
+
+  margin: 0 auto 0 auto;
 }
 .menu-subtitle-image {
   width: min(68vw, 520px);
@@ -267,20 +318,28 @@
   height: auto;
   display: block;
   image-rendering: pixelated;
-  margin: -5rem auto 0 auto; /* Aumentamos el margen negativo para juntarlos más */
+
+  margin: -5rem auto 0 auto;
   transform: scaleX(1.05);
 }
 body {
   margin: 0;
   font-family: "Minecraft", sans-serif;
-  /* cielo estilo Minecraft */
+
   background: linear-gradient(#78c0ff, #9ad6ff 40%, #87ceeb 100%);
   color: white;
   transition: background 1s ease-in-out;
 }
 body.nether-bg {
-  /* Fondo oscuro y rojizo para el Nether */
-  background: #500808;
+  background-image: url("assets/textures/wp3859952-minecraft-nether-wallpapers.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+  background-color: #2b0404;
   overflow: auto;
 }
 #bg {
@@ -292,7 +351,8 @@ body.nether-bg {
   display: block;
   outline: none;
   image-rendering: pixelated;
-  z-index: 1; /* Asegura que el canvas esté sobre el fondo del body */
+
+  z-index: 1;
 }
 .instructions {
   position: fixed;
@@ -304,17 +364,19 @@ body.nether-bg {
   font-size: 13px;
   z-index: 10;
   text-shadow: 2px 2px #00000080;
+
+  display: none;
   transition: opacity 0.5s ease-in;
 }
 .instructions p {
   margin: 5px 0;
 }
 
-/* Cabecera fija con estilo "pixel" */
 .brand {
   position: fixed;
-  top: 15px;
-  right: 15px;
+  top: 20px;
+
+  left: 20px;
   z-index: 40;
   background: #c6c6c6;
   color: #222;
@@ -327,10 +389,11 @@ body.nether-bg {
   font-size: 16px;
   box-shadow: 6px 6px 0 #00000055;
   image-rendering: pixelated;
+
+  display: none;
   transition: opacity 0.5s ease-in;
 }
 
-/* Toolbelt */
 .toolbelt {
   position: fixed;
   left: 15px;
@@ -350,10 +413,9 @@ body.nether-bg {
   cursor: pointer;
 }
 .tool-btn.active {
-  box-shadow: none; /* quitar sombreado externo */
+  box-shadow: none;
 }
 
-/* Chest modal */
 #chest-modal {
   position: fixed;
   inset: 0;
@@ -367,7 +429,7 @@ body.nether-bg {
   display: none;
 }
 .chest-content {
-  width: 560px; /* wider to fit a 9-column chest feel */
+  width: 560px;
   background: #c6c6c6;
   border: 3px solid #111;
   padding: 14px;
@@ -375,14 +437,16 @@ body.nether-bg {
 }
 .chest-items {
   display: grid;
-  grid-template-columns: repeat(9, 1fr); /* 9 slots per row like Minecraft */
+
+  grid-template-columns: repeat(9, 1fr);
   gap: 6px;
   margin-top: 10px;
 }
 .chest-slot {
   width: 48px;
   height: 48px;
-  background: #8b6f4a; /* chest slot background */
+
+  background: #8b6f4a;
   border-top: 3px solid #fff;
   border-left: 3px solid #fff;
   border-bottom: 3px solid #555;
@@ -412,7 +476,6 @@ body.nether-bg {
   z-index: 9999;
 }
 
-/* world labels (projected from 3D to 2D) */
 .world-label {
   position: fixed;
   transform: translate(-50%, -120%);
@@ -426,10 +489,10 @@ body.nether-bg {
   z-index: 50;
   font-size: 13px;
   pointer-events: none;
-  display: none; /* shown when positioned */
+
+  display: none;
 }
 
-/* tarjetas de proyecto (cuando aparezcan en HTML) */
 .card {
   background: url("assets/textures/assets/minecraft/textures/block/stone_inf.png");
   background-size: cover;
@@ -443,7 +506,6 @@ body.nether-bg {
   image-rendering: pixelated;
 }
 
-/* Hero / portada */
 .hero {
   position: absolute;
   top: 50%;
@@ -451,7 +513,8 @@ body.nether-bg {
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 9;
-  pointer-events: none; /* dejar controles al canvas */
+
+  pointer-events: none;
 }
 .hero .title {
   font-size: 48px;
@@ -467,7 +530,6 @@ body.nether-bg {
   text-shadow: 2px 2px 0 #00000088;
 }
 
-/* Botones estilo "pixel" */
 .btn {
   display: inline-block;
   margin: 10px 6px;
@@ -481,7 +543,8 @@ body.nether-bg {
   border-left: 3px solid #ffffff;
   border-bottom: 3px solid #555555;
   border-right: 3px solid #555555;
-  box-shadow: none; /* quitar sombreado externo */
+
+  box-shadow: none;
   image-rendering: pixelated;
   cursor: pointer;
   pointer-events: auto;
@@ -494,7 +557,6 @@ body.nether-bg {
   border-right: 3px solid #ffffff;
 }
 
-/* Grid de proyectos (si agregas elementos HTML) */
 .project-grid {
   position: fixed;
   right: 20px;
@@ -527,7 +589,6 @@ body.nether-bg {
 }
 
 .resume {
-  /* make resume part of the normal document flow so the page is scrollable */
   position: relative;
   margin: 90px 60px 60px 60px;
   display: block;
@@ -629,7 +690,6 @@ body.nether-bg {
   }
 }
 
-/* Ajustes responsive */
 @media (max-width: 700px) {
   .hero .title {
     font-size: 28px;
@@ -648,33 +708,35 @@ body.nether-bg {
     padding: 8px;
   }
 }
-#info-modal {
+#project-detail-modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
+
+  z-index: 2000;
   backdrop-filter: blur(4px);
 }
-#info-modal.hidden {
+#project-detail-modal.hidden {
   display: none;
 }
 .modal-content {
   background-color: #c6c6c6;
   border: 2px solid #1e1e1e;
   padding: 20px;
-  width: 90%;
-  max-width: 500px;
+  width: 90vw;
+  max-width: 700px;
   outline: 2px solid #ffffff;
   position: relative;
   image-rendering: pixelated;
 }
-#close-modal {
+.modal-content #close-project-modal {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -692,27 +754,49 @@ body.nether-bg {
   line-height: 28px;
   text-align: center;
 }
-#close-modal:hover {
+.modal-content #close-project-modal:hover {
   background-color: #f0f0f0;
 }
 .modal-content h2,
 .modal-content p {
   color: #333;
   text-shadow: 2px 2px #dddddd;
+  font-family: "Minecraft", monospace;
 }
-.modal-content a {
-  display: inline-block;
-  background-color: #c6c6c6;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-bottom: 2px solid #555555;
-  border-right: 2px solid #555555;
-  padding: 10px 15px;
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+  background-color: #8b8b8b;
+  border: 2px inset #555;
+  padding: 10px;
+}
+.modal-gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 2px solid #333;
+
+  opacity: 1 !important;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.modal-gallery img:hover {
+  transform: scale(1.05);
+}
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.modal-tech-stack {
   color: #333;
-  text-decoration: none;
-  text-shadow: 2px 2px #dddddd;
-  margin-top: 10px;
+  font-size: 14px;
+  font-family: "Minecraft", monospace;
 }
+
 .modal-content a:hover {
   background-color: #dcdcdc;
 }
@@ -725,11 +809,9 @@ body.nether-bg {
 }
 
 .hidden {
-  opacity: 0 !important;
-  pointer-events: none !important;
+  display: none !important;
 }
 
-/* --- Portal Animation --- */
 .portal-overlay {
   position: fixed;
   inset: 0;
@@ -767,7 +849,6 @@ body.nether-bg {
   }
 }
 
-/* --- Book View (Resume) --- */
 .book-container {
   position: fixed;
   inset: 0;
@@ -794,7 +875,6 @@ body.nether-bg {
   gap: 20px;
 }
 .book-close-btn {
-  /* Estilo de botón de Minecraft */
   font-family: "Minecraft", monospace;
   padding: 10px 20px;
   background-color: var(--color-base);
@@ -822,16 +902,16 @@ body.nether-bg {
     inset -1px 0 0 var(--color-highlight);
 }
 
-/* --- Animated Book --- */
 .book {
-  width: 800px; /* Hacemos el libro más ancho */
+  width: 800px;
   height: 600px;
   position: relative;
   transform-style: preserve-3d;
-  transform: translateX(-80px) rotateY(20deg); /* Aumentamos la compensación para centrarlo mejor */
+
+  transform: translateX(-80px) rotateY(20deg);
   transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-/* La animación de apertura ahora es controlada por la clase .open */
+
 .book.open {
   transform: rotateY(-180deg);
 }
@@ -839,36 +919,33 @@ body.nether-bg {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* Usamos la textura de un libro de Minecraft */
+
   background: url("assets/textures/assets/minecraft/textures/item/book.png")
       center/cover no-repeat,
-    #39291a; /* Color de fondo para rellenar */
-  border: 4px solid #39291a; /* Borde que coincide con la textura */
+    #39291a;
+  border: 4px solid #39291a;
   transform-origin: left;
   transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  backface-visibility: hidden; /* Oculta la parte trasera */
+
+  backface-visibility: hidden;
   z-index: 10;
 }
-/* Añadimos una "cara interior" a la cubierta para ocultar el fondo marrón al girar */
+
 .book-cover::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-  ); /* Mismo color que el fondo del book-container */
+  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   transform: rotateY(180deg);
   backface-visibility: hidden;
   z-index: -1;
 }
-/* La animación de la cubierta también usa .open */
+
 .book.open .book-cover {
   transform: rotateY(-180deg);
   pointer-events: none;
@@ -877,7 +954,8 @@ body.nether-bg {
   text-align: center;
   color: #f9f2e6;
   text-shadow: 2px 2px #3a1a02;
-  transition: opacity 0.3s ease-out; /* Añadimos una transición suave */
+
+  transition: opacity 0.3s ease-out;
 }
 .book-cover-content h2 {
   font-size: 32px;
@@ -887,7 +965,7 @@ body.nether-bg {
   font-size: 18px;
 }
 .book.open .book-cover-content {
-  opacity: 0; /* Ocultamos el texto cuando el libro está abierto */
+  opacity: 0;
 }
 .book-page {
   position: absolute;
@@ -896,12 +974,13 @@ body.nether-bg {
   background-color: #f9f2e6;
   color: #333;
   display: flex;
-  transform: rotateY(180deg); /* Corregimos la inversión del texto */
-  /* Creamos el marco marrón con una sombra interior */
-  box-shadow: inset 0 0 0 10px #5a3a22;
-  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+
+  transform: rotateY(180deg);
+
+  box-sizing: border-box;
   overflow: hidden;
-  backface-visibility: hidden; /* Evita que el texto se vea al revés durante el giro */
+
+  backface-visibility: hidden;
 }
 
 .book-page-left,
@@ -915,7 +994,6 @@ body.nether-bg {
   border-right: 1px dashed #d3c8b3;
 }
 
-/* --- Map View (Contact) --- */
 .map-container {
   position: fixed;
   inset: 0;
@@ -934,12 +1012,13 @@ body.nether-bg {
   pointer-events: auto;
 }
 .map-content {
-  background: url("assets/textures/map_background.png") center/cover; /* Textura de mapa */
+  background: url("assets/textures/map_background.png") center/cover;
   width: 90%;
   max-width: 600px;
   height: 70vh;
   max-height: 450px;
-  border: 8px solid #5a3a22; /* Borde de madera */
+
+  border: 8px solid #5a3a22;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
   position: relative;
   image-rendering: pixelated;
@@ -978,7 +1057,6 @@ body.nether-bg {
   margin-top: 4px;
 }
 
-/* --- Map Decorations --- */
 .map-decoration {
   position: absolute;
   image-rendering: pixelated;
@@ -993,7 +1071,6 @@ body.nether-bg {
   opacity: 0.9;
 }
 
-/* --- Nether Projects View --- */
 .nether-projects-container {
   position: fixed;
   inset: 0;
@@ -1002,11 +1079,13 @@ body.nether-bg {
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity 0.5s 0.3s ease-out;
   pointer-events: none;
+  animation: heat-haze 8s linear infinite alternate;
 }
+
 .nether-projects-container.visible {
   opacity: 1;
   pointer-events: auto;
@@ -1015,8 +1094,8 @@ body.nether-bg {
   width: 90%;
   max-width: 1000px;
   height: 90vh;
-  background: url("assets/textures/assets/minecraft/textures/block/netherrack.png");
-  background-size: 64px;
+
+  background-color: rgba(26, 8, 8, 0.75);
   border: 8px solid #3a1a02;
   border-image: url("assets/textures/assets/minecraft/textures/block/nether_bricks.png")
     16 repeat;
@@ -1027,6 +1106,16 @@ body.nether-bg {
   color: #ffc4c4;
   text-shadow: 2px 2px #3a1a02;
 }
+
+@keyframes heat-haze {
+  from {
+    transform: skewX(-0.1deg) skewY(0.2deg);
+  }
+  to {
+    transform: skewX(0.1deg) skewY(-0.2deg);
+  }
+}
+
 .nether-content h2 {
   text-align: center;
   font-size: 32px;
@@ -1054,11 +1143,20 @@ body.nether-bg {
   padding: 15px;
   text-align: center;
 }
-.project-card-nether img {
-  width: 64px;
-  height: 64px;
-  image-rendering: pixelated;
-  margin-bottom: 10px;
+.project-card-nether .btn-details {
+  font-family: "Minecraft", monospace;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #4a2a12;
+  color: #ffc4c4;
+  border: none;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 #2b1a0a;
+  box-shadow: inset 0 2px 0 #6a4a32, inset 0 -2px 0 #2b1a0a,
+    inset 2px 0 0 #6a4a32, inset -2px 0 0 #2b1a0a;
+}
+.project-card-nether .btn-details:hover {
+  background-color: #6a4a32;
 }
 .project-card-nether a {
   color: #ff8d8d;
@@ -1066,68 +1164,6 @@ body.nether-bg {
   font-weight: bold;
 }
 
-/* --- Nether Projects View --- */
-.nether-projects-container {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  transition: opacity 0.5s 0.3s ease-out;
-  pointer-events: none;
-}
-.nether-projects-container.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-.nether-content {
-  width: 90%;
-  max-width: 1000px;
-  height: 90vh;
-  background: url("assets/textures/assets/minecraft/textures/block/netherrack.png");
-  background-size: 64px;
-  border: 8px solid #3a1a02;
-  /* Cambiamos el borde a Glowstone para un look más del Nether */
-  border-image: url("assets/textures/assets/minecraft/textures/block/glowstone.png")
-    16 repeat;
-  padding: 30px 40px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  position: relative;
-  color: #ffc4c4;
-  text-shadow: 2px 2px #3a1a02;
-}
-.nether-content h2 {
-  text-align: center;
-  font-size: 32px;
-  margin-top: 0;
-}
-.nether-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  background: none;
-  border: none;
-  color: #ffc4c4;
-  cursor: pointer;
-  text-shadow: 2px 2px #3a1a02;
-}
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-.project-card-nether {
-  background-color: rgba(40, 10, 10, 0.8);
-  border: 4px solid #3a1a02;
-  padding: 15px;
-  text-align: center;
-}
 .project-card-nether img {
   width: 64px;
   height: 64px;
@@ -1141,7 +1177,8 @@ body.nether-bg {
 }
 .nether-btn {
   margin-top: 30px;
-  background-color: #4a2a12; /* Color de ladrillo del Nether */
+
+  background-color: #4a2a12;
   color: #ffc4c4;
   text-shadow: 1px 1px 0 #2b1a0a;
   box-shadow: inset 0 2px 0 #6a4a32, inset 0 -2px 0 #2b1a0a,
@@ -1154,4 +1191,72 @@ body.nether-bg {
   background-color: #3a1a02;
   box-shadow: inset 0 2px 0 #2b1a0a, inset 0 -2px 0 #6a4a32,
     inset 2px 0 0 #2b1a0a, inset -2px 0 0 #6a4a32;
+}
+
+#image-lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+  cursor: pointer;
+}
+
+#image-lightbox.hidden {
+  display: none;
+}
+
+#close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px #000;
+}
+
+#lightbox-image {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  border: 4px solid #fff;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+
+  cursor: default;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 15px;
+
+  z-index: 3001;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+.lightbox-nav:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-nav.prev {
+  left: 20px;
+}
+
+.lightbox-nav.next {
+  right: 20px;
 }

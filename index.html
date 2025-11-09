@@ -6,41 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Portafolio - Estilo Minecraft</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Preload fuente Minecraft (si existe en assets/fonts) -->
+
   <link rel="preload" href="assets/fonts/Minecraft.ttf" as="font" type="font/ttf" crossorigin>
 </head>
 
 <body>
   <canvas id="bg"></canvas>
-  <!-- Menú estilo Minecraft -->
+
+  <div id="language-switcher-container" class="language-switcher">
+    <button class="mc-menu-btn small-button" id="btn-language" aria-label="Change language">Lenguaje</button>
+    <div id="language-dropdown" class="language-dropdown hidden">
+      <button class="lang-option" data-lang="en">English</button>
+      <button class="lang-option" data-lang="es">Español</button>
+    </div>
+  </div>
+
+
   <video class="mc-menu-bg-video" autoplay loop muted playsinline>
     <source src="assets/textures/MInecraft Calm Lake - vorobbkk (1080p, vp9).webm" type="video/webm" />
-    <!-- Si el video no carga, se muestra el fondo pixelado -->
+
   </video>
   <div class="mc-menu-bg"></div>
-  <!-- UI click sound (from textures folder) -->
+
   <audio id="nether-ambient-sound" loop preload="auto">
-    <!-- Asumo que tienes un sonido ambiental en esta ruta -->
+
     <source src="assets/sounds/nether_ambient.mp3" type="audio/mpeg">
   </audio>
   <audio id="fire-sound" loop preload="auto">
     <source src="assets/textures/fire.mp3" type="audio/mpeg">
   </audio>
-  <audio id="ui-sound" preload="auto"></audio>
+  <audio id="ui-sound" preload="auto">
+    <source src="assets/textures/Untitled-video-Made-with-Clipchamp.mp3" type="audio/mpeg">
+  </audio>
   <div class="mc-menu-container">
     <div class="mc-menu-header">
-      <!-- Main title image (PNG uploaded by user) -->
+
       <img src="assets/textures/PORTAFOLIO-4-11-2025.png" alt="PORTAFOLIO" class="menu-title-image">
-      <!-- Subtitle image (PNG uploaded by user) -->
+
       <img src="assets/textures/Piero-Sansossio-Edition-4-11-2025.png" alt="Piero Sansossio edition"
         class="menu-subtitle-image">
     </div>
     <div class="mc-menu-buttons">
-      <!-- Two large stacked buttons -->
+
       <button class="mc-menu-btn large" id="btn-about">About Me</button>
       <button class="mc-menu-btn large" id="btn-projects">Projects</button>
 
-      <!-- Bottom row: two smaller buttons side-by-side -->
+
       <div class="bottom-menu">
         <button class="mc-menu-btn small-button" id="btn-contact">Contact</button>
         <button class="mc-menu-btn small-button" id="btn-resume">My Resume</button>
@@ -48,18 +59,18 @@
     </div>
   </div>
 
-  <!-- Portal Overlay for dimension change -->
+
   <div id="portal-overlay" class="portal-overlay">
     <div class="portal-frame"></div>
   </div>
 
-  <!-- Nether Projects View -->
+
   <div id="nether-projects-container" class="nether-projects-container">
     <div class="nether-content">
       <button id="nether-close-btn" class="nether-close-btn">&times;</button>
       <h2>Nether Projects</h2>
       <div id="projects-grid" class="projects-grid">
-        <!-- Los proyectos se cargarán aquí -->
+
       </div>
       <button id="btn-back-to-overworld" class="mc-menu-btn nether-btn">Back to Overworld</button>
     </div>
@@ -69,18 +80,36 @@
 
 
 
-  <div id="info-modal" class="hidden">
+  <div id="project-detail-modal" class="hidden">
     <div class="modal-content">
-      <button id="close-modal">&times;</button>
+      <button id="close-project-modal">&times;</button>
       <h2 id="modal-title">Title</h2>
+      <div id="modal-gallery" class="modal-gallery">
+
+      </div>
       <p id="modal-description">Description...</p>
-      <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer">View Project</a>
+      <div class="modal-footer">
+        <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="mc-menu-btn small-button">View
+          Project</a>
+        <div id="modal-tech" class="modal-tech-stack">
+
+        </div>
+      </div>
     </div>
   </div>
 
 
 
-  <!-- Book View for "About Me" -->
+
+  <div id="image-lightbox" class="hidden">
+    <span id="close-lightbox">&times;</span>
+    <button id="prev-image" class="lightbox-nav prev">&lt;</button>
+    <img id="lightbox-image" src="" alt="Enlarged project image">
+    <button id="next-image" class="lightbox-nav next">&gt;</button>
+  </div>
+
+
+
   <div id="book-container" class="book-container">
     <div class="book-content">
       <div class="book">
@@ -96,57 +125,72 @@
     </div>
   </div>
 
-  <!-- Map View for "Contact" -->
-  <div id="map-container" class="map-container">
-    <div class="map-content">
-      <button id="map-close-btn" class="map-close-btn">&times;</button>
-      <!-- Decoraciones del mapa para darle vida -->
-      <img src="assets/textures/assets/minecraft/textures/block/compass_00.png" class="map-decoration compass"
-        alt="Compass">
-      <img src="assets/textures/assets/minecraft/textures/block/oak_log.png" class="map-decoration"
-        style="width: 32px; top: 75%; left: 15%;" alt="Tree">
-      <img src="assets/textures/assets/minecraft/textures/block/oak_log.png" class="map-decoration"
-        style="width: 32px; top: 80%; left: 18%;" alt="Tree">
-      <img src="assets/textures/assets/minecraft/textures/block/stone.png" class="map-decoration"
-        style="width: 48px; top: 10%; left: 60%;" alt="Mountain">
-      <img src="assets/textures/assets/minecraft/textures/block/stone.png" class="map-decoration"
-        style="width: 40px; top: 15%; left: 65%;" alt="Mountain">
 
-      <a href="https://www.linkedin.com/in/pierosansossio-590877291" target="_blank" rel="noopener" class="map-marker"
-        style="top: 30%; left: 25%;">
-        <img src="assets/textures/assets/minecraft/textures/block/bookshelf.png" alt="LinkedIn">
-        <span>LinkedIn</span>
-      </a>
-      <a href="https://github.com/PieroSansossio" target="_blank" rel="noopener" class="map-marker"
-        style="top: 65%; left: 70%;">
-        <img src="assets/textures/assets/minecraft/textures/block/crafting_table_top.png" alt="GitHub">
-        <span>GitHub</span>
-      </a>
-      <a href="mailto:piero.sansossio@gmail.com" class="map-marker" style="top: 50%; left: 50%;">
-        <img src="assets/textures/assets/minecraft/textures/block/enchanting_table_top.png" alt="Email">
-        <span>Email</span>
-      </a>
+  <div id="map-container" class="map-container">
+    <!-- Este contenedor está vacío, pero lo declaro para evitar errores en el script si se referencia. -->
+  </div>
+
+
+  <div id="crafting-table-container" class="crafting-table-container">
+    <div class="crafting-table-content">
+      <button id="crafting-table-close-btn" class="crafting-table-close-btn">&times;</button>
+      <h2>Contact Me</h2>
+      <div class="crafting-grid-container">
+        <div class="crafting-grid">
+          <div class="crafting-slot"></div>
+          <div class="crafting-slot">
+            <a href="https://www.linkedin.com/in/pierosansossio-590877291" target="_blank" rel="noopener"
+              class="contact-item">
+              <img src="assets/textures/assets/minecraft/textures/block/bookshelf.png" alt="LinkedIn">
+              <span>LinkedIn</span>
+            </a>
+          </div>
+          <div class="crafting-slot"></div>
+          <div class="crafting-slot">
+            <a href="https://github.com/pierox-afk" target="_blank" rel="noopener" class="contact-item">
+              <img src="assets/textures/assets/minecraft/textures/block/crafting_table_top.png" alt="GitHub">
+              <span>GitHub</span>
+            </a>
+          </div>
+          <div class="crafting-slot"></div>
+          <div class="crafting-slot">
+            <a href="mailto:piero.sansossio@gmail.com" class="contact-item">
+              <img src="assets/textures/assets/minecraft/textures/block/enchanting_table_top.png" alt="Email">
+              <span>Email</span>
+            </a>
+          </div>
+          <div class="crafting-slot"></div>
+          <div class="crafting-slot"></div>
+          <div class="crafting-slot"></div>
+        </div>
+        <div class="crafting-arrow">
+          <img src="assets/textures/assets/minecraft/textures/gui/container/crafting_table.png" alt="arrow">
+        </div>
+        <div class="crafting-output">
+          <div class="crafting-slot">
+            <img src="assets/textures/Piero-Sansossio-Edition-4-11-2025.png" alt="My face"
+              style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script type="module">
     import * as THREE from './lib/three.js-master/build/three.module.js';
-    // expose globally for legacy scripts that expect `THREE` on window
     window.THREE = THREE;
   </script>
   <script>
-    // Asegurar que la ruta del vídeo con espacios/paréntesis se codifique correctamente
     (function () {
       const vid = document.querySelector('.mc-menu-bg-video');
       if (!vid) return;
       const srcEl = vid.querySelector('source');
       if (!srcEl) return;
       const rawPath = srcEl.getAttribute('src');
-      // encodeURI preserva / y : y codifica espacios y paréntesis
       const encoded = encodeURI(rawPath);
       if (encoded !== rawPath) srcEl.setAttribute('src', encoded);
 
-      // reload source and try to play; if fails, hide video and show fallback
+
       vid.load();
       vid.addEventListener('loadeddata', () => {
         console.log('mc menu video loaded OK');
@@ -162,7 +206,7 @@
       });
       vid.play().catch((err) => {
         console.warn('video.play() rejected:', err);
-        // autoplay policy may block play; keep muted and show fallback if needed
+
         vid.style.display = 'none';
         const fallback = document.querySelector('.mc-menu-bg');
         if (fallback) fallback.style.display = 'block';
@@ -171,9 +215,9 @@
   </script>
   <script src="main.js"></script>
   <script>
-    // Pequeñas interacciones: abrir / cerrar about y smooth scroll
+
     document.addEventListener('DOMContentLoaded', async function () {
-      // Toolbelt
+
       const toolbelt = document.getElementById('toolbelt');
       if (toolbelt) {
         let selectedTool = 'hand';
@@ -183,27 +227,79 @@
           document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           selectedTool = btn.dataset.tool;
-          // store on window for main.js access
+
           window.portfolioSelectedTool = selectedTool;
         });
       }
 
-      // Chest modal close
+
       const chestModal = document.getElementById('chest-modal');
       const closeChest = document.getElementById('close-chest');
       if (closeChest) closeChest.addEventListener('click', (e) => { e.preventDefault(); chestModal.classList.add('hidden'); });
 
-      // --- Lógica de ui.js movida aquí ---
+
+      const projectDetailModal = document.getElementById('project-detail-modal');
+      document.getElementById('close-project-modal').addEventListener('click', () => projectDetailModal.classList.add('hidden'));
+
+
+      const imageLightbox = document.getElementById('image-lightbox');
+      const lightboxImage = document.getElementById('lightbox-image');
+      const prevImageBtn = document.getElementById('prev-image');
+      const nextImageBtn = document.getElementById('next-image');
+      let currentProjectImages = [];
+      let currentImageIndex = 0;
+
+      function updateLightboxImage() {
+        if (currentProjectImages.length > 0) {
+          lightboxImage.src = currentProjectImages[currentImageIndex];
+        }
+      }
+
+
+      imageLightbox.addEventListener('click', () => {
+        imageLightbox.classList.add('hidden');
+      });
+
+
+      prevImageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+        updateLightboxImage();
+      });
+
+      nextImageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
+        updateLightboxImage();
+      });
+
+
+      lightboxImage.addEventListener('click', (e) => e.stopPropagation());
+
+
+      let currentLanguage = 'en';
+      let siteData = {};
+
+      function setLanguage(lang) {
+        currentLanguage = lang;
+
+        updateUIText();
+        populateProjects(siteData.projects);
+        populateResume(siteData.resume);
+
+
+      }
+
+
       try {
         const response = await fetch('data.json');
-        const data = await response.json();
-        populateProjects(data.projects); // Cargar datos de proyectos
-        populateResume(data.resume);
+        siteData = await response.json();
+        setLanguage(currentLanguage);
       } catch (error) {
         console.error('Error fetching or populating data:', error);
       }
 
-      // --- Lógica para la transición del menú y pantallas ---
+
       const menuContainer = document.querySelector('.mc-menu-container');
       const menuVideo = document.querySelector('.mc-menu-bg-video');
       const menuBg = document.querySelector('.mc-menu-bg');
@@ -213,77 +309,92 @@
       const netherProjectsContainer = document.getElementById('nether-projects-container');
       const bookContainer = document.getElementById('book-container');
       const mapContainer = document.getElementById('map-container');
+      const languageSwitcher = document.getElementById('language-switcher-container');
+      const craftingTableContainer = document.getElementById('crafting-table-container');
 
-      // --- Desbloqueo de Audio ---
-      // Los navegadores modernos bloquean el audio hasta la primera interacción.
-      // Esta función "desbloquea" los sonidos en el primer clic.
+
+
+
+
+
       function unlockAudio() {
         netherSound.play().then(() => netherSound.pause()).catch(() => { });
         fireSound.play().then(() => fireSound.pause()).catch(() => { });
-        // Una vez desbloqueado, ya no necesitamos este evento.
+
         window.removeEventListener('click', unlockAudio);
       }
       window.addEventListener('click', unlockAudio);
-      // --- Fin de Desbloqueo de Audio ---
+
 
 
       function enterScene() {
+        // Ocultar todos los contenedores principales
         menuContainer.classList.add('hidden');
+        languageSwitcher.classList.add('hidden');
+        bookContainer.classList.remove('visible');
+        craftingTableContainer.classList.add('hidden'); // Asegurarse de que la mesa de crafteo esté oculta
 
-        // Inicia la animación del portal
+
+
         const portalOverlay = document.getElementById('portal-overlay');
         portalOverlay.classList.add('active');
 
-        // Espera a que la animación del portal esté en su punto álgido
-        setTimeout(() => {
-          menuVideo.classList.add('hidden');
 
-          menuBg.style.opacity = '0'; // Forzamos la ocultación del fondo del menú
-          document.body.classList.add('nether-bg'); // Cambia el fondo al del Nether
-          portalOverlay.classList.remove('active'); // Desvanece el portal
+        setTimeout(() => {
+          if (menuVideo) menuVideo.style.display = 'none';
+
+          menuBg.style.opacity = '0';
+          document.body.classList.add('nether-bg');
+          portalOverlay.classList.remove('active');
           netherProjectsContainer.classList.add('visible');
-        }, 1500); // 1.5 segundos para la transición
+        }, 1500);
       }
 
       function returnToMenu() {
         const isFromNether = netherProjectsContainer.classList.contains('visible');
 
+        // Ocultar todos los contenedores de "escena"
         if (isFromNether) {
-          // Detiene el sonido del Nether
+
           netherSound.pause();
           netherSound.currentTime = 0;
           fireSound.pause();
-          fireSound.currentTime = 0; // Corregimos para que apunte a fireSound
-          // Oculta la pantalla de proyectos del Nether
+          fireSound.currentTime = 0;
+
           netherProjectsContainer.classList.remove('visible');
 
-          // Activa la animación del portal para el regreso
+
           const portalOverlay = document.getElementById('portal-overlay');
           portalOverlay.classList.add('active');
 
-          // Espera a que la animación del portal haga efecto
+
           setTimeout(() => {
-            document.body.classList.remove('nether-bg'); // Restaura el fondo original
-            menuContainer.classList.remove('hidden');
-            menuVideo.classList.remove('hidden');
-            menuBg.style.opacity = '1';
-            portalOverlay.classList.remove('active'); // Desvanece el portal
+            document.body.classList.remove('nether-bg');
+            portalOverlay.classList.remove('active');
+            // Mostrar el menú principal al final de la transición
+            showMainMenu();
           }, 1500);
         } else {
-          // Lógica para cerrar el libro o el mapa (sin portal)
+          // Ocultar libro y mesa de crafteo
           const book = bookContainer.querySelector('.book');
           if (book && book.classList.contains('open')) book.classList.remove('open');
           bookContainer.classList.remove('visible');
-          mapContainer.classList.remove('visible');
-          menuContainer.classList.remove('hidden');
-          menuVideo.classList.remove('hidden');
-          menuBg.style.opacity = '1';
+          craftingTableContainer.classList.remove('visible');
+          // Mostrar el menú principal
+          showMainMenu();
         }
       }
 
-      // --- Asignar eventos a los botones ---
+      function showMainMenu() {
+        if (menuVideo) menuVideo.style.display = 'block';
+        menuBg.style.opacity = '1';
+        menuContainer.classList.remove('hidden');
+        languageSwitcher.classList.remove('hidden');
+      }
 
-      // Menú principal
+
+
+
       document.getElementById('btn-about').addEventListener('click', (e) => {
         e.preventDefault();
         menuContainer.classList.add('hidden');
@@ -292,7 +403,7 @@
 
       document.getElementById('btn-projects').addEventListener('click', (e) => {
         e.preventDefault();
-        // Preparamos y reproducimos los sonidos de una manera más robusta
+
         try {
           netherSound.volume = 0.5;
           netherSound.play();
@@ -307,7 +418,7 @@
       document.getElementById('btn-contact').addEventListener('click', (e) => {
         e.preventDefault();
         menuContainer.classList.add('hidden');
-        mapContainer.classList.add('visible');
+        craftingTableContainer.classList.remove('hidden');
       });
 
       document.getElementById('btn-resume').addEventListener('click', (e) => {
@@ -316,32 +427,38 @@
         bookContainer.classList.add('visible');
       });
 
-      // Abrir el libro al hacer clic en la cubierta
+
+
       document.querySelector('.book-cover').addEventListener('click', () => {
         const book = document.querySelector('.book');
         book.classList.add('open');
       });
 
-      // Botones de cierre de las pantallas
+
       document.getElementById('book-close-btn').addEventListener('click', () => {
         const book = bookContainer.querySelector('.book');
 
-        // 1. Si el libro está abierto, inicia la animación de cierre
+
         if (book && book.classList.contains('open')) {
           book.classList.remove('open');
 
-          // 2. Espera a que la animación de cierre (1.2s) termine antes de volver al menú
+
           setTimeout(() => {
-            bookContainer.classList.remove('visible'); // Oculta el contenedor del libro
-            returnToMenu(); // Muestra el menú principal
+            bookContainer.classList.remove('visible');
+            showMainMenu();
           }, 1200);
         } else {
-          // Si el libro ya está cerrado, vuelve al menú inmediatamente
+
           returnToMenu();
         }
       });
 
-      document.getElementById('map-close-btn').addEventListener('click', () => {
+      // El elemento map-close-btn no existe en tu HTML, lo comento para evitar errores.
+      // document.getElementById('map-close-btn').addEventListener('click', () => {
+      //   returnToMenu();
+      // });
+      document.getElementById('crafting-table-close-btn').addEventListener('click', () => {
+        craftingTableContainer.classList.add('hidden');
         returnToMenu();
       });
 
@@ -353,50 +470,166 @@
         returnToMenu();
       });
 
+      function getText(data) {
+        if (typeof data === 'string') return data;
+        return data[currentLanguage] || data['en'];
+      }
+
+      function updateUIText() {
+
+        document.getElementById('btn-about').textContent = currentLanguage === 'en' ? 'About Me' : 'Sobre Mí';
+        document.getElementById('btn-projects').textContent = currentLanguage === 'en' ? 'Projects' : 'Proyectos';
+        document.getElementById('btn-contact').textContent = currentLanguage === 'en' ? 'Contact' : 'Contacto';
+        document.getElementById('btn-resume').textContent = currentLanguage === 'en' ? 'My Resume' : 'Mi CV';
+
+
+        const langButton = document.getElementById('btn-language');
+        const langDropdown = document.getElementById('language-dropdown');
+        langButton.textContent = currentLanguage === 'en' ? 'Language' : 'Idioma';
+
+
+        langButton.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          langDropdown.classList.toggle('hidden');
+        };
+
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+          option.onclick = (e) => {
+            e.preventDefault();
+            setLanguage(option.dataset.lang);
+            langDropdown.classList.add('hidden');
+          };
+        });
+
+
+        window.addEventListener('click', () => {
+          if (!langDropdown.classList.contains('hidden')) {
+            langDropdown.classList.add('hidden');
+          }
+        });
+
+        document.querySelector('.book-cover-content h2').textContent = currentLanguage === 'en' ? "Piero's Journal" : "Diario de Piero";
+        document.querySelector('.book-cover-content span').textContent = currentLanguage === 'en' ? "(About Me)" : "(Sobre Mí)";
+        document.getElementById('book-close-btn').textContent = currentLanguage === 'en' ? 'Close Book' : 'Cerrar Libro';
+        document.querySelector('.nether-content h2').textContent = currentLanguage === 'en' ? 'Nether Projects' : 'Proyectos del Nether';
+        document.getElementById('btn-back-to-overworld').textContent = currentLanguage === 'en' ? 'Back to Overworld' : 'Volver al Overworld';
+        document.querySelector('.crafting-table-content h2').textContent = currentLanguage === 'en' ? 'Contact Me' : 'Contáctame';
+        document.getElementById('modal-link').textContent = currentLanguage === 'en' ? 'View Project' : 'Ver Proyecto';
+      }
+
       function populateResume(resumeData) {
-        const resume = document.getElementById('resume-content'); // Apuntamos al contenedor del libro
+        const resume = document.getElementById('resume-content');
         if (!resume) return;
         resume.innerHTML = `
           <div class="book-page-left">
             <header class="resume-header">
-              <h1>${resumeData.name}</h1>
+              <h1>${getText(resumeData.name)}</h1>
               <div class="resume-meta">
               </div>
             </header>
             <div class="resume-body">
-              <h3>Profile</h3>
-              <p>${resumeData.profile}</p>
+              <h3>${currentLanguage === 'en' ? 'Profile' : 'Perfil'}</h3>
+              <p>${getText(resumeData.profile)}</p>
             </div>
           </div>
           <div class="book-page-right">
-            <h3>My Growth Strategy</h3>
-            <p>${resumeData.education.description}</p>
+            <h3>${currentLanguage === 'en' ? 'My Growth Strategy' : 'Mi Estrategia de Crecimiento'}</h3>
+            <p>${getText(resumeData.education.description)}</p>
             <br>
             
-            <p>${resumeData.profileSummary}</p>
+            <p>${getText(resumeData.profileSummary)}</p>
           </div>`;
       }
 
       function populateProjects(projectsData) {
         const projectsGrid = document.getElementById('projects-grid');
         if (!projectsGrid) return;
-        projectsGrid.innerHTML = projectsData.map(project => `
-          <div class="project-card-nether">
-            <img src="${project.icon}" alt="${project.title}">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <a href="${project.link}" target="_blank" rel="noopener">View Project</a>
-          </div>
-        `).join('');
+        projectsGrid.innerHTML = projectsData.map(project => {
+          // Caso especial para el proyecto "Este Portafolio"
+          if (project.title.en === "This Portfolio") {
+            return `
+              <div class="project-card-nether">
+                <h3>${getText(project.title)}</h3>
+                <p>${getText(project.description)}</p>
+                <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn-details">${currentLanguage === 'en' ? 'View on GitHub' : 'Ver en GitHub'}</a>
+              </div>`;
+          }
+          // Comportamiento normal para los demás proyectos
+          return `
+            <div class="project-card-nether" data-project='${JSON.stringify(project)}'>
+              <h3>${getText(project.title)}</h3>
+              <p>${getText(project.description)}</p>
+              <button class="btn-details">${currentLanguage === 'en' ? 'Details' : 'Detalles'}</button>
+            </div>`;
+        }).join('');
+
+
+        document.querySelectorAll('.project-card-nether .btn-details').forEach(button => {
+          if (button.tagName === 'BUTTON') { // Solo añadir listener a los botones, no a los enlaces <a>
+            button.addEventListener('click', (e) => {
+              const card = e.target.closest('.project-card-nether');
+              const projectData = JSON.parse(card.dataset.project);
+              showProjectDetails(projectData);
+            });
+          }
+        });
       }
 
-      // Setup UI click sound using Web Audio API (buffers sound to avoid delay)
+      function showProjectDetails(project) {
+        const modal = document.getElementById('project-detail-modal');
+        const gallery = document.getElementById('modal-gallery');
+        const techStack = document.getElementById('modal-tech');
+
+        document.getElementById('modal-title').textContent = getText(project.title);
+        document.getElementById('modal-description').textContent = getText(project.longDescription || project.description);
+        document.getElementById('modal-link').href = project.link;
+
+
+        gallery.innerHTML = '';
+        if (project.images && project.images.length > 0) {
+
+          currentProjectImages = project.images;
+
+          project.images.forEach((imgSrc, index) => {
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = `Image for ${getText(project.title)}`;
+
+            img.onerror = function () {
+              console.error(`Error: No se pudo cargar la imagen en la ruta: "${imgSrc}". Verifica que el archivo exista y el nombre sea correcto.`);
+              this.alt = `Error al cargar: ${imgSrc}`;
+            };
+
+            img.addEventListener('click', (e) => {
+              e.stopPropagation();
+              currentImageIndex = index;
+              lightboxImage.src = imgSrc;
+              imageLightbox.classList.remove('hidden');
+            });
+            gallery.appendChild(img);
+          });
+        } else {
+          gallery.innerHTML = `<p style="color: #333; text-align: center;">No images found for this project.</p>`;
+        }
+
+
+        techStack.innerHTML = '';
+        if (project.technologies && project.technologies.length > 0) {
+          const techLabel = currentLanguage === 'en' ? 'Tech' : 'Tecnologías';
+          techStack.innerHTML = `<strong>${techLabel}:</strong> ${project.technologies.join(', ')}`;
+        }
+        modal.classList.remove('hidden');
+      }
+
+
       (function () {
         const audioPath = 'assets/textures/Voicy_Minecraft Click.mp3';
         let audioBuffer = null;
         let audioCtx = null;
 
-        // Try to initialize AudioContext and decode the file
+
         async function initAudio() {
           try {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -412,7 +645,7 @@
 
         function playBufferedClick() {
           if (audioCtx && audioBuffer) {
-            // Si el AudioContext está suspendido, un clic del usuario lo reanudará.
+
             if (audioCtx.state === 'suspended') {
               audioCtx.resume();
             }
@@ -422,13 +655,13 @@
               const gain = audioCtx.createGain();
               gain.gain.value = 0.9;
               src.connect(gain).connect(audioCtx.destination);
-              // Iniciar la reproducción saltando los primeros 5ms para evitar el silencio inicial del archivo.
+
               src.start(0, 0.005);
             } catch (e) {
-              // ignore
+
             }
           } else {
-            // fallback to HTMLAudio element for older browsers
+
             const el = document.getElementById('ui-sound');
             if (el) {
               try {
@@ -439,9 +672,9 @@
           }
         }
 
-        // initialize and attach handlers
+
         initAudio();
-        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-modal, #close-chest, #book-close-btn, #map-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld');
+        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #crafting-table-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language');
         els.forEach(el => el.addEventListener('click', playBufferedClick));
       })();
     });
