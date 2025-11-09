@@ -38,6 +38,9 @@
   <audio id="ui-sound" preload="auto">
     <source src="assets/textures/Untitled-video-Made-with-Clipchamp.mp3" type="audio/mpeg">
   </audio>
+  <audio id="villager-sound" preload="auto">
+    <source src="assets/textures/com/minecraft-villager-289282.mp3" type="audio/mpeg">
+  </audio>
   <div class="mc-menu-container">
     <div class="mc-menu-header">
 
@@ -161,7 +164,7 @@
             </div>
           </a>
           <!-- Trade for Email -->
-          <a href="mailto:piero.sansossio@gmail.com" class="trade-offer" data-no-sound>
+          <a href="mailto:piero.sansossio@gmail.com" class="trade-offer" data-no-sound="true">
             <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
             </div>
             <div class="trade-arrow"></div>
@@ -340,6 +343,8 @@
       function unlockAudio() {
         netherSound.play().then(() => netherSound.pause()).catch(() => { });
         fireSound.play().then(() => fireSound.pause()).catch(() => { });
+        const villagerSound = document.getElementById('villager-sound');
+        if (villagerSound) villagerSound.play().then(() => villagerSound.pause()).catch(() => { });
 
         window.removeEventListener('click', unlockAudio);
       }
@@ -439,6 +444,13 @@
 
       document.getElementById('btn-contact').addEventListener('click', (e) => {
         e.preventDefault();
+        try {
+          const villagerSound = document.getElementById('villager-sound');
+          villagerSound.currentTime = 0;
+          villagerSound.play();
+        } catch (err) {
+          console.error("Error al reproducir sonido de aldeano:", err);
+        }
         menuContainer.classList.add('hidden');
         villagerTradeContainer.classList.remove('hidden');
       });
@@ -714,7 +726,7 @@
 
 
         initAudio();
-        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #villager-trade-close-btn, #end-cv-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language');
+        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #villager-trade-close-btn, #end-cv-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language, .trade-offer');
         els.forEach(el => {
           if (!el.hasAttribute('data-no-sound')) {
             el.addEventListener('click', playBufferedClick);
