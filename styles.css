@@ -1260,3 +1260,159 @@ body.nether-bg {
 .lightbox-nav.next {
   right: 20px;
 }
+
+/* Estilos para la sección del CV con temática del End */
+.end-cv-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.end-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      2px 2px at 20px 30px,
+      #eee,
+      rgba(0, 0, 0, 0)
+    ),
+    radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: twinkle 10s infinite linear;
+  opacity: 0.6;
+}
+
+@keyframes twinkle {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200px);
+  }
+}
+
+.end-stars-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      1px 1px at 10px 15px,
+      #fff,
+      rgba(0, 0, 0, 0)
+    ),
+    radial-gradient(1px 1px at 80px 140px, #fff, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: twinkle-2 20s infinite linear;
+  opacity: 0.4;
+}
+
+@keyframes twinkle-2 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-300px, 300px);
+  }
+}
+
+.end-cv-content {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 1200px;
+  text-align: center;
+  color: #e0e0e0;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.end-cv-content h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.cv-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cv-images img {
+  max-width: 45%;
+  height: auto;
+  border: 4px solid #2c2c2c;
+  box-shadow: 0 0 15px #e0e0e033;
+}
+
+.end-cv-close-btn {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  font-size: 40px;
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px #000;
+}
+
+/* Estilos para la Transición del Portal del End (Puro CSS) */
+.end-portal-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.end-portal-transition.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.end-portal-transition.active .portal-vortex {
+  animation: portal-zoom-in 1.5s ease-in forwards; /* Animación más rápida */
+}
+
+.end-portal-transition .portal-vortex {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border: none; /* Quitamos el borde para que la imagen sea la protagonista */
+  box-shadow: inset 0 0 20px #000, 0 0 30px #1e1e24;
+  /* Usamos la nueva imagen como fondo */
+  background-image: url("assets/textures/end/Endportal.webp");
+  background-size: cover; /* Asegura que la imagen cubra el área */
+  background-position: center; /* Centra la imagen */
+}
+
+@keyframes portal-zoom-in {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(6); /* Aumentamos la escala para asegurar que cubra todo */
+  }
+}
