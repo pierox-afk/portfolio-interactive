@@ -131,46 +131,44 @@
   </div>
 
 
-  <div id="crafting-table-container" class="crafting-table-container">
-    <div class="crafting-table-content">
-      <button id="crafting-table-close-btn" class="crafting-table-close-btn">&times;</button>
-      <h2>Contact Me</h2>
-      <div class="crafting-grid-container">
-        <div class="crafting-grid">
-          <div class="crafting-slot"></div>
-          <div class="crafting-slot">
-            <a href="https://www.linkedin.com/in/pierosansossio-590877291" target="_blank" rel="noopener"
-              class="contact-item">
-              <img src="assets/textures/assets/minecraft/textures/block/bookshelf.png" alt="LinkedIn">
+  <!-- Nueva sección de Contacto: Mesa de Encantamientos -->
+  <div id="villager-trade-container" class="villager-trade-container hidden">
+    <div class="villager-trade-content">
+      <button id="villager-trade-close-btn" class="villager-trade-close-btn">&times;</button>
+      <h2>Trade with Piero</h2>
+      <div class="villager-trade-ui">
+        <div class="villager-portrait">
+          <img src="assets/textures/com/Plains_Villager_Base.webp" alt="Villager Piero">
+        </div>
+        <div class="trade-list">
+          <!-- Trade for LinkedIn -->
+          <a href="https://www.linkedin.com/in/pierosansossio-590877291" target="_blank" rel="noopener"
+            class="trade-offer">
+            <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
+            </div>
+            <div class="trade-arrow"></div>
+            <div class="trade-slot"><img src="assets/textures/com/paper.png" alt="Paper">
               <span>LinkedIn</span>
-            </a>
-          </div>
-          <div class="crafting-slot"></div>
-          <div class="crafting-slot">
-            <a href="https://github.com/pierox-afk" target="_blank" rel="noopener" class="contact-item">
-              <img src="assets/textures/assets/minecraft/textures/block/crafting_table_top.png" alt="GitHub">
+            </div>
+          </a>
+          <!-- Trade for GitHub -->
+          <a href="https://github.com/pierox-afk" target="_blank" rel="noopener" class="trade-offer">
+            <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
+            </div>
+            <div class="trade-arrow"></div>
+            <div class="trade-slot"><img src="assets/textures/com/Book_JE2_BE2.png" alt="Book">
               <span>GitHub</span>
-            </a>
-          </div>
-          <div class="crafting-slot"></div>
-          <div class="crafting-slot">
-            <a href="mailto:piero.sansossio@gmail.com" class="contact-item">
-              <img src="assets/textures/assets/minecraft/textures/block/enchanting_table_top.png" alt="Email">
+            </div>
+          </a>
+          <!-- Trade for Email -->
+          <a href="mailto:piero.sansossio@gmail.com" class="trade-offer" data-no-sound>
+            <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
+            </div>
+            <div class="trade-arrow"></div>
+            <div class="trade-slot"><img src="assets/textures/com/writable_book.png" alt="Book and Quill">
               <span>Email</span>
-            </a>
-          </div>
-          <div class="crafting-slot"></div>
-          <div class="crafting-slot"></div>
-          <div class="crafting-slot"></div>
-        </div>
-        <div class="crafting-arrow">
-          <img src="assets/textures/assets/minecraft/textures/gui/container/crafting_table.png" alt="arrow">
-        </div>
-        <div class="crafting-output">
-          <div class="crafting-slot">
-            <img src="assets/textures/Piero-Sansossio-Edition-4-11-2025.png" alt="My face"
-              style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -331,7 +329,7 @@
       const bookContainer = document.getElementById('book-container');
       const mapContainer = document.getElementById('map-container');
       const languageSwitcher = document.getElementById('language-switcher-container');
-      const craftingTableContainer = document.getElementById('crafting-table-container');
+      const villagerTradeContainer = document.getElementById('villager-trade-container');
       const endCvContainer = document.getElementById('end-cv-container');
 
 
@@ -354,7 +352,7 @@
         menuContainer.classList.add('hidden');
         languageSwitcher.classList.add('hidden');
         bookContainer.classList.remove('visible');
-        craftingTableContainer.classList.add('hidden'); // Asegurarse de que la mesa de crafteo esté oculta
+        villagerTradeContainer.classList.add('hidden');
         endCvContainer.classList.add('hidden');
 
 
@@ -402,7 +400,7 @@
           const book = bookContainer.querySelector('.book');
           if (book && book.classList.contains('open')) book.classList.remove('open');
           bookContainer.classList.remove('visible');
-          craftingTableContainer.classList.remove('visible');
+          villagerTradeContainer.classList.add('hidden');
           endCvContainer.classList.add('hidden');
           // Mostrar el menú principal
           showMainMenu();
@@ -442,7 +440,7 @@
       document.getElementById('btn-contact').addEventListener('click', (e) => {
         e.preventDefault();
         menuContainer.classList.add('hidden');
-        craftingTableContainer.classList.remove('hidden');
+        villagerTradeContainer.classList.remove('hidden');
       });
 
       document.getElementById('btn-resume').addEventListener('click', (e) => {
@@ -492,8 +490,8 @@
       });
 
 
-      document.getElementById('crafting-table-close-btn').addEventListener('click', () => {
-        craftingTableContainer.classList.add('hidden');
+      document.getElementById('villager-trade-close-btn').addEventListener('click', () => {
+        villagerTradeContainer.classList.add('hidden');
         returnToMenu();
       });
 
@@ -555,8 +553,8 @@
         document.querySelector('.book-cover-content span').textContent = currentLanguage === 'en' ? "(About Me)" : "(Sobre Mí)";
         document.getElementById('book-close-btn').textContent = currentLanguage === 'en' ? 'Close Book' : 'Cerrar Libro';
         document.querySelector('.nether-content h2').textContent = currentLanguage === 'en' ? 'Nether Projects' : 'Proyectos del Nether';
-        document.getElementById('btn-back-to-overworld').textContent = currentLanguage === 'en' ? 'Back to Overworld' : 'Volver al Overworld';
-        document.querySelector('.crafting-table-content h2').textContent = currentLanguage === 'en' ? 'Contact Me' : 'Contáctame';
+        document.getElementById('btn-back-to-overworld').textContent = currentLanguage === 'en' ? 'Back to Overworld' : 'Volver al Overworld';;
+        document.querySelector('#villager-trade-container h2').textContent = currentLanguage === 'en' ? 'Trade with Piero' : 'Comerciar con Piero';
         document.getElementById('modal-link').textContent = currentLanguage === 'en' ? 'View Project' : 'Ver Proyecto';
         document.querySelector('#end-cv-container h2').textContent = currentLanguage === 'en' ? 'My CV' : 'Mi CV';
       }
@@ -716,11 +714,29 @@
 
 
         initAudio();
-        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #crafting-table-close-btn, #end-cv-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language');
-        els.forEach(el => el.addEventListener('click', playBufferedClick));
+        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #villager-trade-close-btn, #end-cv-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language');
+        els.forEach(el => {
+          if (!el.hasAttribute('data-no-sound')) {
+            el.addEventListener('click', playBufferedClick);
+          }
+        });
       })();
     });
   </script>
 </body>
+
+</html>
+
+</html> });
+})();
+});
+</script>
+</body>
+
+</html>
+
+</html>
+
+</html>
 
 </html>

@@ -1261,6 +1261,121 @@ body.nether-bg {
   right: 20px;
 }
 
+/* Estilos para el Comercio con Aldeano */
+.villager-trade-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.villager-trade-content {
+  background-color: #c6c6c6;
+  border: 3px solid #1e1e1e;
+  outline: 3px solid #707070;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+.villager-trade-content h2 {
+  text-align: center;
+  font-size: 20px;
+  color: #3f3f3f;
+  margin: 0 0 15px 0;
+}
+
+.villager-trade-close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #3f3f3f;
+  cursor: pointer;
+}
+
+.villager-trade-ui {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.villager-portrait {
+  width: 128px;
+  height: 128px;
+  background-color: #8b8b8b;
+  border: 2px inset #555;
+  flex-shrink: 0;
+}
+
+.villager-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.trade-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.trade-offer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background-color: #8b8b8b;
+  border: 2px inset #555;
+  cursor: pointer;
+  text-decoration: none;
+  color: #3f3f3f;
+  transition: background-color 0.2s;
+}
+
+.trade-offer:hover {
+  background-color: #a0a0a0;
+}
+
+.trade-slot {
+  width: 52px;
+  height: 52px;
+  background-color: #c6c6c6;
+  border: 2px solid #373737;
+  border-top-color: #a0a0a0;
+  border-left-color: #a0a0a0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trade-slot img {
+  width: 32px;
+  height: 32px;
+}
+
+.trade-slot span {
+  font-size: 12px;
+}
+
+.trade-arrow {
+  width: 32px;
+  height: 32px;
+  background: url("assets/textures/com/villager2.png") -175px -15px;
+}
+
 /* Estilos para la sección del CV con temática del End */
 .end-cv-container {
   position: fixed;
