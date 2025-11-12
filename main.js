@@ -1,4 +1,18 @@
 const scene = new THREE.Scene();
+
+const loadingManager = new THREE.LoadingManager();
+const loadingBar = document.getElementById("loading-bar");
+
+loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
+  const progress = (itemsLoaded / itemsTotal) * 100;
+  if (loadingBar) {
+    loadingBar.style.width = progress + "%";
+  }
+};
+
+loadingManager.onLoad = function () {
+  window.dispatchEvent(new CustomEvent("allAssetsLoaded"));
+};
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -8,19 +22,19 @@ const camera = new THREE.PerspectiveCamera(
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector("#bg"),
   antialias: true,
-  alpha: true, 
+  alpha: true,
 });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 renderer.setClearColor(0x000000, 0);
-camera.position.set(0, 5, 25); 
+camera.position.set(0, 5, 25);
 const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
 scene.add(ambientLight);
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); 
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
 directionalLight.position.set(15, 20, 10);
 scene.add(directionalLight);
-const textureLoader = new THREE.TextureLoader();
+const textureLoader = new THREE.TextureLoader(loadingManager);
 function loadPixelatedTexture(path) {
   const texture = textureLoader.load(path);
   texture.magFilter = THREE.NearestFilter;
@@ -72,7 +86,6 @@ const grassMaterials = [
   new THREE.MeshLambertMaterial({ map: textures.grassSide }),
 ];
 
-
 const netherrackMaterial = new THREE.MeshLambertMaterial({
   map: textures.netherrack,
 });
@@ -107,9 +120,9 @@ function createAshParticles() {
 
   for (let i = 0; i < particleCount; i++) {
     const i3 = i * 3;
-    positions[i3] = (Math.random() - 0.5) * 100; 
-    positions[i3 + 1] = Math.random() * 50; 
-    positions[i3 + 2] = (Math.random() - 0.5) * 100; 
+    positions[i3] = (Math.random() - 0.5) * 100;
+    positions[i3 + 1] = Math.random() * 50;
+    positions[i3 + 2] = (Math.random() - 0.5) * 100;
   }
 
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
@@ -177,7 +190,6 @@ async function init() {
 
   createAshParticles();
 
-  
   animate();
 }
 
@@ -185,15 +197,13 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function onMouseClick(event) {
-  
   const projectDetailModal = document.getElementById("project-detail-modal");
-  const chestModal = document.getElementById("chest-modal"); 
+  const chestModal = document.getElementById("chest-modal");
   if (
     (projectDetailModal && !projectDetailModal.classList.contains("hidden")) ||
     (chestModal && !chestModal.classList.contains("hidden"))
   )
     return;
-
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
@@ -201,34 +211,24 @@ function onMouseClick(event) {
   if (intersects.length > 0) {
     const obj = intersects[0].object;
     const data = obj.userData || {};
-
-    
     if (data.type === "chest") {
-      
       obj.rotation.y += 0.8;
       return;
     }
-    
-    
   }
 }
 
 function openOre(data, obj) {
-  
   if (obj) {
     try {
       scene.remove(obj);
     } catch (e) {}
-    
     const idx = interactiveBlocks.indexOf(obj);
     if (idx >= 0) interactiveBlocks.splice(idx, 1);
   }
-
-  
   const modal = document.getElementById("project-detail-modal");
   document.getElementById("modal-title").innerText = data.title || "Ore";
   let desc = data.description || "";
-  
   if (data.reward) {
     desc += "\n\nReward: " + (data.reward.name || "Unknown");
   }
@@ -255,15 +255,12 @@ function animate() {
   aboutMeBlock.rotation.y = time * 0.2;
   projectBlock.rotation.y = time * 0.2;
   projectBlock.position.y = BLOCK_SIZE / 2 + Math.sin(time * 1.5) * 0.5;
-  
-
-  
   if (ashParticles) {
     const positions = ashParticles.geometry.attributes.position.array;
     for (let i = 0; i < positions.length; i += 3) {
-      positions[i + 1] -= 0.02; 
+      positions[i + 1] -= 0.02;
       if (positions[i + 1] < -10) {
-        positions[i + 1] = 50; 
+        positions[i + 1] = 50;
       }
     }
     ashParticles.geometry.attributes.position.needsUpdate = true;
@@ -290,7 +287,6 @@ function updateWorldLabels() {
     vec.project(camera);
     const x = (vec.x * 0.5 + 0.5) * window.innerWidth;
     const y = (-vec.y * 0.5 + 0.5) * window.innerHeight;
-    
     if (vec.z > 1 || vec.z < -1) {
       el.style.display = "none";
     } else {
@@ -299,7 +295,6 @@ function updateWorldLabels() {
       el.style.top = y + "px";
     }
   };
-
   try {
     proj(
       chestBlock.position
@@ -311,7 +306,5 @@ function updateWorldLabels() {
       oreBlock.position.clone().add(new THREE.Vector3(0, BLOCK_SIZE / 1.5, 0)),
       labelOre
     );
-  } catch (e) {
-    
-  }
+  } catch (e) {}
 }

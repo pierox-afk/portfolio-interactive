@@ -152,16 +152,20 @@
     "upwork": "#",
     "phone": "Contact for details",
     "profile": {
-      "en": "Frontend Developer with 4 years of experience dedicated to creating scalable, interactive web applications with a solid architecture. My primary focus is on code refactoring and legacy system migration to guarantee production quality and long-term performance.",
-      "es": "Desarrollador Frontend con 4 años de experiencia dedicado a crear aplicaciones web escalables e interactivas con una arquitectura sólida. Mi enfoque principal es la refactorización de código y la migración de sistemas heredados para garantizar la calidad en producción y el rendimiento a largo plazo."
+      "en": "I am a Frontend Developer with 4 years of experience creating scalable, interactive, and high-performance User Interfaces (UI). My specialization is focused on the architecture and refactoring of complex codebases using React and TypeScript, ensuring production quality and efficiency.",
+      "es": "Soy un Desarrollador Frontend con 4 años de experiencia creando Interfaces de Usuario (UI) escalables, interactivas y de alto rendimiento. Mi especialización se centra en la arquitectura y refactorización de bases de código complejas usando React y TypeScript, garantizando calidad y eficiencia en producción."
     },
     "profileSummary": {
-      "en": "I seek challenging opportunities where my architectural expertise and drive for continuous improvement can generate a significant impact on product stability and success.",
-      "es": "Busco oportunidades desafiantes donde mi experiencia en arquitectura y mi impulso por la mejora continua puedan generar un impacto significativo en la estabilidad y el éxito del producto."
+      "en": "My approach is to create solutions that not only function correctly but are also scalable and maintainable.",
+      "es": "Mi enfoque es crear soluciones que no solo funcionen correctamente, sino que también sean escalables y mantenibles."
     },
     "skills": [
       "JavaScript",
       "React",
+      "Vue.js",
+      "TypeScript",
+      "Redux Toolkit",
+      "Context API",
       "HTML5",
       "CSS3",
       "DOM Manipulación",
@@ -181,8 +185,8 @@
       "institution": "Jose Antonio Paez University, Valencia, Venezuela",
       "period": "Oct 2019 - Present",
       "description": {
-        "en": "My knowledge is built on a unique combination of formal education and specialized self-learning. I have developed a comprehensive understanding of application architecture and performance optimization through my university education, complemented by advanced studies in React.js and Redux Toolkit. My technical skills in high-demand areas like TypeScript, WebSockets, and Testing have been greatly enhanced by continuous, hands-on self-education through platforms such as Platzi, Coursera, and YouTube.",
-        "es": "Mi conocimiento se basa en una combinación única de educación formal y autoaprendizaje especializado. He desarrollado una comprensión integral de la arquitectura de aplicaciones y la optimización del rendimiento a través de mi educación universitaria, complementada con estudios avanzados en React.js y Redux Toolkit. Mis habilidades técnicas en áreas de alta demanda como TypeScript, WebSockets y Testing se han visto potenciadas por la autoeducación continua y práctica en plataformas como Platzi, Coursera y YouTube."
+        "en": "<strong>Frameworks & State Management:</strong> Proficient in React and Vue.js, with advanced state management using Redux Toolkit and the Context API.<br><br><strong>Design & Performance:</strong> Expert in UI/UX Development and Responsive Design, utilizing Tailwind CSS. I actively implement performance optimization strategies (code splitting, lazy loading) which have resulted in a 30% reduction in main page load time.<br><br><strong>Quality & Stability:</strong> Proven experience writing unit and integration tests with Jest and React Testing Library to ensure stability and architectural soundness.<br><br><strong>Data Integration:</strong> Solid experience integrating RESTful APIs and WebSockets to handle real-time data efficiently.",
+        "es": "<strong>Frameworks y Manejo de Estado:</strong> Competente en React y Vue.js, con manejo de estado avanzado usando Redux Toolkit y la Context API.<br><br><strong>Diseño y Rendimiento:</strong> Experto en Desarrollo UI/UX y Diseño Responsivo, utilizando Tailwind CSS. Implemento activamente estrategias de optimización de rendimiento (code splitting, lazy loading) que han resultado en una reducción del 30% en el tiempo de carga de la página principal.<br><br><strong>Calidad y Estabilidad:</strong> Experiencia demostrada escribiendo pruebas unitarias y de integración con Jest y React Testing Library para asegurar la estabilidad y solidez de la arquitectura.<br><br><strong>Integración de Datos:</strong> Sólida experiencia integrando APIs RESTful y WebSockets para manejar datos en tiempo real de manera eficiente."
       }
     }
   }

@@ -13,7 +13,12 @@
 </head>
 
 <body>
-  <canvas id="bg"></canvas>
+  <div id="loading-screen">
+    <div class="loading-text">Loading Resources...</div>
+    <div class="loading-bar-container">
+      <div id="loading-bar" class="loading-bar"></div>
+    </div>
+  </div>
 
   <div id="language-switcher-container" class="language-switcher">
     <button class="mc-menu-btn small-button" id="btn-language" aria-label="Change language">Lenguaje</button>
@@ -30,17 +35,17 @@
   </video>
   <div class="mc-menu-bg"></div>
 
-  <audio id="nether-ambient-sound" loop preload="auto">
+  <audio id="nether-ambient-sound" loop preload="auto" playsinline>
 
     <source src="assets/sounds/nether_ambient.mp3" type="audio/mpeg">
   </audio>
-  <audio id="fire-sound" loop preload="auto">
+  <audio id="fire-sound" loop preload="auto" playsinline>
     <source src="assets/textures/fire.mp3" type="audio/mpeg">
   </audio>
-  <audio id="ui-sound" preload="auto">
+  <audio id="ui-sound" preload="auto" playsinline>
     <source src="assets/textures/Untitled-video-Made-with-Clipchamp.mp3" type="audio/mpeg">
   </audio>
-  <audio id="villager-sound" preload="auto">
+  <audio id="villager-sound" preload="auto" playsinline>
     <source src="assets/textures/com/minecraft-villager-289282.mp3" type="audio/mpeg">
   </audio>
   <div class="mc-menu-container">
@@ -131,12 +136,7 @@
   </div>
 
 
-  <div id="map-container" class="map-container">
-    <!-- Este contenedor está vacío, pero lo declaro para evitar errores en el script si se referencia. -->
-  </div>
 
-
-  <!-- Nueva sección de Contacto: Mesa de Encantamientos -->
   <div id="villager-trade-container" class="villager-trade-container hidden">
     <div class="villager-trade-content">
       <button id="villager-trade-close-btn" class="villager-trade-close-btn">&times;</button>
@@ -146,7 +146,6 @@
           <img src="assets/textures/com/Plains_Villager_Base.webp" alt="Villager Piero">
         </div>
         <div class="trade-list">
-          <!-- Trade for LinkedIn -->
           <a href="https://www.linkedin.com/in/pierosansossio-590877291" target="_blank" rel="noopener"
             class="trade-offer">
             <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
@@ -156,7 +155,6 @@
               <span>LinkedIn</span>
             </div>
           </a>
-          <!-- Trade for GitHub -->
           <a href="https://github.com/pierox-afk" target="_blank" rel="noopener" class="trade-offer">
             <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
             </div>
@@ -165,7 +163,6 @@
               <span>GitHub</span>
             </div>
           </a>
-          <!-- Trade for Email -->
           <a href="mailto:piero.sansossio@gmail.com" class="trade-offer" data-no-sound="true">
             <div class="trade-slot"><img src="assets/textures/com/emerald.jpeg" alt="Emerald">
             </div>
@@ -179,7 +176,6 @@
     </div>
   </div>
 
-  <!-- Nueva sección para el CV con temática del End -->
   <div id="end-cv-container" class="end-cv-container hidden">
     <div class="end-stars"></div>
     <div class="end-stars-2"></div>
@@ -187,25 +183,20 @@
       <button id="end-cv-close-btn" class="end-cv-close-btn">&times;</button>
       <h2>Mi CV</h2>
       <div class="cv-images">
-        <img src="assets/textures/Piero_cvlast.pdf-1.png" alt="CV Página 1">
-        <img src="assets/textures/Piero_cvlast.pdf-2.png" alt="CV Página 2">
+        <img src="assets/textures/Piero_cvlast.pdf-1.webp" alt="CV Página 1">
+        <img src="assets/textures/Piero_cvlast.pdf-2.webp" alt="CV Página 2">
       </div>
+      <a href="assets/textures/Piero_cvlast.pdf" download="Piero_Sansossio_CV.pdf" id="download-cv-btn"
+        class="end-cv-btn">Descargar mi CV (PDF)</a>
+
     </div>
   </div>
 
-  <!-- Contenedor para la animación de transición al End -->
   <div id="end-portal-transition" class="end-portal-transition hidden">
-    <div class="portal-vortex">
-      <!-- El contenido del portal ahora se genera con CSS -->
-    </div>
+    <div class="portal-vortex"></div>
   </div>
 
-  <script type="module">
-    import * as THREE from './lib/three.js-master/build/three.module.js';
-    window.THREE = THREE;
-  </script>
-  <script>
-    (function () {
+  <script>    (function () {
       const vid = document.querySelector('.mc-menu-bg-video');
       if (!vid) return;
       const srcEl = vid.querySelector('source');
@@ -237,30 +228,14 @@
       });
     })();
   </script>
-  <script src="main.js"></script>
   <script>
 
     document.addEventListener('DOMContentLoaded', async function () {
 
-      const toolbelt = document.getElementById('toolbelt');
-      if (toolbelt) {
-        let selectedTool = 'hand';
-        toolbelt.addEventListener('click', (e) => {
-          const btn = e.target.closest('.tool-btn');
-          if (!btn) return;
-          document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          selectedTool = btn.dataset.tool;
-
-          window.portfolioSelectedTool = selectedTool;
-        });
-      }
-
-
-      const chestModal = document.getElementById('chest-modal');
-      const closeChest = document.getElementById('close-chest');
-      if (closeChest) closeChest.addEventListener('click', (e) => { e.preventDefault(); chestModal.classList.add('hidden'); });
-
+      const loadingScreen = document.getElementById('loading-screen');
+      window.addEventListener('load', () => {
+        loadingScreen.classList.add('hidden');
+      });
 
       const projectDetailModal = document.getElementById('project-detail-modal');
       document.getElementById('close-project-modal').addEventListener('click', () => projectDetailModal.classList.add('hidden'));
@@ -327,12 +302,10 @@
       const menuContainer = document.querySelector('.mc-menu-container');
       const menuVideo = document.querySelector('.mc-menu-bg-video');
       const menuBg = document.querySelector('.mc-menu-bg');
-      const gameUI = document.querySelectorAll('.instructions');
       const fireSound = document.getElementById('fire-sound');
       const netherSound = document.getElementById('nether-ambient-sound');
       const netherProjectsContainer = document.getElementById('nether-projects-container');
       const bookContainer = document.getElementById('book-container');
-      const mapContainer = document.getElementById('map-container');
       const languageSwitcher = document.getElementById('language-switcher-container');
       const villagerTradeContainer = document.getElementById('villager-trade-container');
       const endCvContainer = document.getElementById('end-cv-container');
@@ -355,33 +328,17 @@
 
 
       function enterScene() {
-        // Ocultar todos los contenedores principales
+        document.body.classList.add('nether-bg');
         menuContainer.classList.add('hidden');
         languageSwitcher.classList.add('hidden');
-        bookContainer.classList.remove('visible');
-        villagerTradeContainer.classList.add('hidden');
-        endCvContainer.classList.add('hidden');
-
-
-
-        const portalOverlay = document.getElementById('portal-overlay');
-        portalOverlay.classList.add('active');
-
-
-        setTimeout(() => {
-          if (menuVideo) menuVideo.style.display = 'none';
-
-          menuBg.style.opacity = '0';
-          document.body.classList.add('nether-bg');
-          portalOverlay.classList.remove('active');
-          netherProjectsContainer.classList.add('visible');
-        }, 1500);
+        if (menuVideo) menuVideo.style.display = 'none';
+        menuBg.style.opacity = '0';
+        netherProjectsContainer.classList.add('visible');
       }
 
       function returnToMenu() {
         const isFromNether = netherProjectsContainer.classList.contains('visible');
 
-        // Ocultar todos los contenedores de "escena"
         if (isFromNether) {
 
           netherSound.pause();
@@ -389,27 +346,17 @@
           fireSound.pause();
           fireSound.currentTime = 0;
 
+          document.body.classList.remove('nether-bg');
           netherProjectsContainer.classList.remove('visible');
-
-
-          const portalOverlay = document.getElementById('portal-overlay');
-          portalOverlay.classList.add('active');
-
-
-          setTimeout(() => {
-            document.body.classList.remove('nether-bg');
-            portalOverlay.classList.remove('active');
-            // Mostrar el menú principal al final de la transición
-            showMainMenu();
-          }, 1500);
+          showMainMenu();
         } else {
-          // Ocultar libro y mesa de crafteo
+
           const book = bookContainer.querySelector('.book');
           if (book && book.classList.contains('open')) book.classList.remove('open');
           bookContainer.classList.remove('visible');
           villagerTradeContainer.classList.add('hidden');
           endCvContainer.classList.add('hidden');
-          // Mostrar el menú principal
+
           showMainMenu();
         }
       }
@@ -461,20 +408,20 @@
         e.preventDefault();
         const endPortalTransition = document.getElementById('end-portal-transition');
 
-        // Ocultar menú
+
         menuContainer.classList.add('hidden');
         languageSwitcher.classList.add('hidden');
 
-        // Iniciar animación
+
         endPortalTransition.classList.remove('hidden');
         endPortalTransition.classList.add('active');
 
-        // Después de la animación, mostrar el CV y ocultar la transición
+
         setTimeout(() => {
           endCvContainer.classList.remove('hidden');
           endPortalTransition.classList.add('hidden');
           endPortalTransition.classList.remove('active');
-        }, 1500); // Reducimos la duración para que coincida con la nueva animación
+        }, 1500);
       });
 
 
@@ -511,7 +458,6 @@
 
       document.getElementById('end-cv-close-btn').addEventListener('click', () => {
         endCvContainer.classList.add('hidden');
-        // No es necesario llamar a returnToMenu aquí si showMainMenu ya lo hace
         returnToMenu();
       });
 
@@ -601,7 +547,6 @@
         const projectsGrid = document.getElementById('projects-grid');
         if (!projectsGrid) return;
         projectsGrid.innerHTML = projectsData.map(project => {
-          // Caso especial para el proyecto "Este Portafolio"
           if (project.title.en === "This Portfolio") {
             return `
               <div class="project-card-nether">
@@ -610,7 +555,6 @@
                 <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn-details">${currentLanguage === 'en' ? 'View on GitHub' : 'Ver en GitHub'}</a>
               </div>`;
           }
-          // Comportamiento normal para los demás proyectos
           return `
             <div class="project-card-nether" data-project='${JSON.stringify(project)}'>
               <h3>${getText(project.title)}</h3>
@@ -621,7 +565,7 @@
 
 
         document.querySelectorAll('.project-card-nether .btn-details').forEach(button => {
-          if (button.tagName === 'BUTTON') { // Solo añadir listener a los botones, no a los enlaces <a>
+          if (button.tagName === 'BUTTON') {
             button.addEventListener('click', (e) => {
               const card = e.target.closest('.project-card-nether');
               const projectData = JSON.parse(card.dataset.project);
@@ -728,10 +672,16 @@
 
 
         initAudio();
-        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #villager-trade-close-btn, #end-cv-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language, .trade-offer');
+        const els = document.querySelectorAll('.mc-menu-btn, .btn, .open-chest-btn, #close-project-modal, #close-chest, #book-close-btn, #villager-trade-close-btn, #end-cv-close-btn, .book-cover, #nether-close-btn, #btn-back-to-overworld, .btn-details, #btn-language, .trade-offer, #download-cv-btn');
         els.forEach(el => {
           if (!el.hasAttribute('data-no-sound')) {
-            el.addEventListener('click', playBufferedClick);
+            el.addEventListener('click', function (event) {
+              if (this.id === 'download-cv-btn') {
+                playBufferedClick();
+              } else {
+                playBufferedClick();
+              }
+            });
           }
         });
       })();
@@ -741,16 +691,7 @@
 
 </html>
 
-</html> });
-})();
-});
-</script>
-</body>
 
-</html>
 
-</html>
 
-</html>
-
-</html>
+< <
