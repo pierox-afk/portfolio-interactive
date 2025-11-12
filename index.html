@@ -13,20 +13,21 @@
 </head>
 
 <body>
-  <div id="loading-screen">
+  <div id="loading-screen" role="status" aria-live="polite">
     <div class="loading-text">Loading Resources...</div>
     <div class="loading-bar-container">
       <div id="loading-bar" class="loading-bar"></div>
     </div>
   </div>
 
-  <div id="language-switcher-container" class="language-switcher">
-    <button class="mc-menu-btn small-button" id="btn-language" aria-label="Change language">Lenguaje</button>
-    <div id="language-dropdown" class="language-dropdown hidden">
-      <button class="lang-option" data-lang="en">English</button>
-      <button class="lang-option" data-lang="es">Español</button>
-    </div>
-  </div>
+  <nav id="language-switcher-container" class="language-switcher" aria-label="Language selection">
+    <button class="mc-menu-btn small-button" id="btn-language" aria-label="Change language" aria-haspopup="true"
+      aria-expanded="false">Lenguaje</button>
+    <ul id="language-dropdown" class="language-dropdown hidden" role="menu">
+      <li role="none"><button class="lang-option" data-lang="en" role="menuitem">English</button></li>
+      <li role="none"><button class="lang-option" data-lang="es" role="menuitem">Español</button></li>
+    </ul>
+  </nav>
 
 
   <video class="mc-menu-bg-video" autoplay loop muted playsinline>
@@ -75,10 +76,11 @@
   </div>
 
 
-  <div id="nether-projects-container" class="nether-projects-container">
+  <div id="nether-projects-container" class="nether-projects-container" role="dialog" aria-modal="true"
+    aria-labelledby="nether-title">
     <div class="nether-content">
-      <button id="nether-close-btn" class="nether-close-btn">&times;</button>
-      <h2>Nether Projects</h2>
+      <button id="nether-close-btn" class="nether-close-btn" aria-label="Close projects view">&times;</button>
+      <h2 id="nether-title">Nether Projects</h2>
       <div id="projects-grid" class="projects-grid">
 
       </div>
@@ -86,13 +88,9 @@
     </div>
   </div>
 
-
-
-
-
-  <div id="project-detail-modal" class="hidden">
+  <div id="project-detail-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-content">
-      <button id="close-project-modal">&times;</button>
+      <button id="close-project-modal" aria-label="Close project details">&times;</button>
       <h2 id="modal-title">Title</h2>
       <div id="modal-gallery" class="modal-gallery">
 
@@ -108,39 +106,34 @@
     </div>
   </div>
 
-
-
-
-  <div id="image-lightbox" class="hidden">
-    <span id="close-lightbox">&times;</span>
-    <button id="prev-image" class="lightbox-nav prev">&lt;</button>
+  <div id="image-lightbox" class="hidden" role="dialog" aria-modal="true" aria-label="Image gallery">
+    <button id="close-lightbox" aria-label="Close gallery">&times;</button>
+    <button id="prev-image" class="lightbox-nav prev" aria-label="Previous image">&lt;</button>
     <img id="lightbox-image" src="" alt="Enlarged project image">
-    <button id="next-image" class="lightbox-nav next">&gt;</button>
+    <button id="next-image" class="lightbox-nav next" aria-label="Next image">&gt;</button>
   </div>
 
-
-
-  <div id="book-container" class="book-container">
+  <div id="book-container" class="book-container" role="dialog" aria-modal="true" aria-labelledby="book-title">
     <div class="book-content">
       <div class="book">
-        <div class="book-cover">
+        <div class="book-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="resume-content">
           <div class="book-cover-content">
-            <h2>Piero's Journal</h2>
+            <h2 id="book-title">Piero's Journal</h2>
             <span>(About Me)</span>
           </div>
         </div>
         <div id="resume-content" class="book-page"></div>
       </div>
-      <button id="book-close-btn" class="book-close-btn">Close Book</button>
+      <button id="book-close-btn" class="book-close-btn" aria-label="Close book">Close Book</button>
     </div>
   </div>
 
-
-
-  <div id="villager-trade-container" class="villager-trade-container hidden">
+  <div id="villager-trade-container" class="villager-trade-container hidden" role="dialog" aria-modal="true"
+    aria-labelledby="villager-title">
     <div class="villager-trade-content">
-      <button id="villager-trade-close-btn" class="villager-trade-close-btn">&times;</button>
-      <h2>Trade with Piero</h2>
+      <button id="villager-trade-close-btn" class="villager-trade-close-btn"
+        aria-label="Close contact window">&times;</button>
+      <h2 id="villager-title">Trade with Piero</h2>
       <div class="villager-trade-ui">
         <div class="villager-portrait">
           <img src="assets/textures/com/Plains_Villager_Base.webp" alt="Villager Piero">
@@ -176,12 +169,12 @@
     </div>
   </div>
 
-  <div id="end-cv-container" class="end-cv-container hidden">
+  <div id="end-cv-container" class="end-cv-container hidden" role="dialog" aria-modal="true" aria-labelledby="cv-title">
     <div class="end-stars"></div>
     <div class="end-stars-2"></div>
     <div class="end-cv-content">
-      <button id="end-cv-close-btn" class="end-cv-close-btn">&times;</button>
-      <h2>Mi CV</h2>
+      <button id="end-cv-close-btn" class="end-cv-close-btn" aria-label="Close CV view">&times;</button>
+      <h2 id="cv-title">Mi CV</h2>
       <div class="cv-images">
         <img src="assets/textures/Piero_cvlast.pdf-1.webp" alt="CV Página 1">
         <img src="assets/textures/Piero_cvlast.pdf-2.webp" alt="CV Página 2">
@@ -428,13 +421,15 @@
 
       document.querySelector('.book-cover').addEventListener('click', () => {
         const book = document.querySelector('.book');
+        const cover = document.querySelector('.book-cover');
         book.classList.add('open');
+        cover.setAttribute('aria-expanded', 'true');
       });
 
 
       document.getElementById('book-close-btn').addEventListener('click', () => {
         const book = bookContainer.querySelector('.book');
-
+        const cover = document.querySelector('.book-cover');
 
         if (book && book.classList.contains('open')) {
           book.classList.remove('open');
@@ -443,6 +438,7 @@
           setTimeout(() => {
             bookContainer.classList.remove('visible');
             showMainMenu();
+            cover.setAttribute('aria-expanded', 'false');
           }, 1200);
         } else {
 
@@ -506,13 +502,14 @@
         window.addEventListener('click', () => {
           if (!langDropdown.classList.contains('hidden')) {
             langDropdown.classList.add('hidden');
+            langButton.setAttribute('aria-expanded', 'false');
           }
         });
 
         document.querySelector('.book-cover-content h2').textContent = currentLanguage === 'en' ? "Piero's Journal" : "Diario de Piero";
         document.querySelector('.book-cover-content span').textContent = currentLanguage === 'en' ? "(About Me)" : "(Sobre Mí)";
         document.getElementById('book-close-btn').textContent = currentLanguage === 'en' ? 'Close Book' : 'Cerrar Libro';
-        document.querySelector('.nether-content h2').textContent = currentLanguage === 'en' ? 'Nether Projects' : 'Proyectos del Nether';
+        document.getElementById('nether-title').textContent = currentLanguage === 'en' ? 'Nether Projects' : 'Proyectos del Nether';
         document.getElementById('btn-back-to-overworld').textContent = currentLanguage === 'en' ? 'Back to Overworld' : 'Volver al Overworld';;
         document.querySelector('#villager-trade-container h2').textContent = currentLanguage === 'en' ? 'Trade with Piero' : 'Comerciar con Piero';
         document.getElementById('modal-link').textContent = currentLanguage === 'en' ? 'View Project' : 'Ver Proyecto';
