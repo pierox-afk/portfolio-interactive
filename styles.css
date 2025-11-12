@@ -408,55 +408,7 @@ body.nether-bg {
   background-color: #2b0404;
   overflow: auto;
 }
-.instructions {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background: rgba(0, 0, 0, 0.45);
-  padding: 10px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  z-index: 10;
-  text-shadow: 2px 2px #00000080;
 
-  display: none;
-  transition: opacity 0.5s ease-in;
-}
-.instructions p {
-  margin: 5px 0;
-}
-
-.brand {
-  position: fixed;
-  top: 20px;
-
-  left: 20px;
-  z-index: 40;
-  background: #c6c6c6;
-  color: #222;
-  padding: 8px 12px;
-  border-top: 3px solid #ffffff;
-  border-left: 3px solid #ffffff;
-  border-bottom: 3px solid #555;
-  border-right: 3px solid #555;
-  font-weight: 700;
-  font-size: 16px;
-  box-shadow: 6px 6px 0 #00000055;
-  image-rendering: pixelated;
-
-  display: none;
-  transition: opacity 0.5s ease-in;
-}
-
-.toolbelt {
-  position: fixed;
-  left: 15px;
-  top: 15px;
-  z-index: 40;
-  display: flex;
-  gap: 8px;
-  transition: opacity 0.5s ease-in;
-}
 .tool-btn {
   background: #c6c6c6;
   border-top: 3px solid #fff;

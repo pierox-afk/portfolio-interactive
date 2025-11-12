@@ -321,12 +321,19 @@
 
 
       function enterScene() {
-        document.body.classList.add('nether-bg');
         menuContainer.classList.add('hidden');
         languageSwitcher.classList.add('hidden');
-        if (menuVideo) menuVideo.style.display = 'none';
-        menuBg.style.opacity = '0';
-        netherProjectsContainer.classList.add('visible');
+
+        const portalOverlay = document.getElementById('portal-overlay');
+        portalOverlay.classList.add('active');
+
+        setTimeout(() => {
+          if (menuVideo) menuVideo.style.display = 'none';
+          menuBg.style.opacity = '0';
+          document.body.classList.add('nether-bg');
+          portalOverlay.classList.remove('active');
+          netherProjectsContainer.classList.add('visible');
+        }, 1500);
       }
 
       function returnToMenu() {
@@ -341,7 +348,14 @@
 
           document.body.classList.remove('nether-bg');
           netherProjectsContainer.classList.remove('visible');
-          showMainMenu();
+
+          const portalOverlay = document.getElementById('portal-overlay');
+          portalOverlay.classList.add('active');
+
+          setTimeout(() => {
+            portalOverlay.classList.remove('active');
+            showMainMenu();
+          }, 1500);
         } else {
 
           const book = bookContainer.querySelector('.book');
